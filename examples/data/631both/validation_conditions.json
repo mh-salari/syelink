@@ -1,0 +1,20 @@
+{
+    "validations": {
+        "6": {
+            "calibration_condition": "dark",
+            "validation_condition": "dark"
+        },
+        "7": {
+            "calibration_condition": "dark",
+            "validation_condition": "bright"
+        },
+        "9": {
+            "calibration_condition": "bright",
+            "validation_condition": "bright"
+        },
+        "10": {
+            "calibration_condition": "bright",
+            "validation_condition": "dark"
+        }
+    }
+}
