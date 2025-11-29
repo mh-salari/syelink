@@ -1,0 +1,4332 @@
+{
+    "calibrations": [
+        {
+            "timestamp": 270129,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -36.2,
+                        "raw_y": -114.3,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -35.4,
+                        "raw_y": -125.1,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -35.5,
+                        "raw_y": -96.5,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -57.6,
+                        "raw_y": -110.6,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -14.9,
+                        "raw_y": -111.0,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -56.9,
+                        "raw_y": -122.2,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -15.9,
+                        "raw_y": -124.0,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -55.9,
+                        "raw_y": -91.6,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -14.0,
+                        "raw_y": -97.5,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 119.98,
+                    "y": 3.7625,
+                    "xx": -0.0051343,
+                    "yy": -0.47168
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 1.1614,
+                    "y": 152.45,
+                    "xx": -1.1095,
+                    "yy": -2.6127
+                },
+                "gains": {
+                    "cx": 189.343,
+                    "lx": 204.884,
+                    "rx": 212.186,
+                    "cy": 985.598,
+                    "ty": 71.873,
+                    "by": 951.361
+                },
+                "corner_correction": {
+                    "q0_x": -1.3496e-05,
+                    "q0_y": -1.6691e-05,
+                    "q1_x": -4.8914e-05,
+                    "q1_y": -3.957e-05,
+                    "q2_x": -1.7359e-06,
+                    "q2_y": -5.3909e-05,
+                    "q3_x": -1.947e-05,
+                    "q3_y": 0.00017288
+                },
+                "prenorm_x": -36.206,
+                "prenorm_y": -114.3
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "FAILED",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -37.7,
+                        "raw_y": -138.4,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -39.8,
+                        "raw_y": -144.7,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -36.9,
+                        "raw_y": -118.3,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -57.0,
+                        "raw_y": -135.9,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -20.4,
+                        "raw_y": -128.1,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -59.3,
+                        "raw_y": -146.2,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -21.8,
+                        "raw_y": -139.5,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -55.7,
+                        "raw_y": -114.5,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -17.7,
+                        "raw_y": -117.7,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 145.21,
+                    "y": -37.247,
+                    "xx": 0.88222,
+                    "yy": 1.577
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -41.455,
+                    "y": 264.71,
+                    "xx": -3.7227,
+                    "yy": -8.4203
+                },
+                "gains": null,
+                "corner_correction": null,
+                "prenorm_x": -37.671,
+                "prenorm_y": -138.37
+            }
+        },
+        {
+            "timestamp": 305910,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -42.8,
+                        "raw_y": -133.9,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -42.7,
+                        "raw_y": -143.1,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -43.3,
+                        "raw_y": -116.4,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -67.6,
+                        "raw_y": -130.3,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -19.1,
+                        "raw_y": -133.8,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -66.3,
+                        "raw_y": -141.6,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -19.5,
+                        "raw_y": -145.0,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -68.6,
+                        "raw_y": -114.7,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -17.3,
+                        "raw_y": -115.6,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 105.8,
+                    "y": 2.0253,
+                    "xx": 0.088024,
+                    "yy": 0.05786
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 11.064,
+                    "y": 176.05,
+                    "xx": -0.5111,
+                    "yy": -3.8807
+                },
+                "gains": {
+                    "cx": 1122.703,
+                    "lx": 1054.413,
+                    "rx": 1244.019,
+                    "cy": 331.771,
+                    "ty": 40.107,
+                    "by": 333.28
+                },
+                "corner_correction": {
+                    "q0_x": -3.0695e-05,
+                    "q0_y": 3.3786e-05,
+                    "q1_x": -1.735e-05,
+                    "q1_y": -8.2144e-05,
+                    "q2_x": -2.5954e-05,
+                    "q2_y": -0.00016229,
+                    "q3_x": -5.4989e-05,
+                    "q3_y": 2.3616e-06
+                },
+                "prenorm_x": -42.798,
+                "prenorm_y": -133.91
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -47.4,
+                        "raw_y": -202.8,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -49.5,
+                        "raw_y": -209.7,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -44.9,
+                        "raw_y": -186.3,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -69.6,
+                        "raw_y": -203.4,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -25.1,
+                        "raw_y": -198.7,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -73.0,
+                        "raw_y": -206.0,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -26.7,
+                        "raw_y": -204.9,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -69.1,
+                        "raw_y": -188.0,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -22.4,
+                        "raw_y": -178.8,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 118.33,
+                    "y": -30.484,
+                    "xx": 0.075767,
+                    "yy": 0.76492
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -22.662,
+                    "y": 238.1,
+                    "xx": -0.71052,
+                    "yy": -7.2786
+                },
+                "gains": {
+                    "cx": 15737.284,
+                    "lx": 14014.729,
+                    "rx": 17675.025,
+                    "cy": 105632.484,
+                    "ty": 123.587,
+                    "by": 77617.773
+                },
+                "corner_correction": {
+                    "q0_x": 0.00012727,
+                    "q0_y": -0.00057714,
+                    "q1_x": -1.5109e-05,
+                    "q1_y": 0.00018924,
+                    "q2_x": -4.9381e-05,
+                    "q2_y": 3.4317e-05,
+                    "q3_x": -0.00013786,
+                    "q3_y": 0.00098074
+                },
+                "prenorm_x": -47.427,
+                "prenorm_y": -202.8
+            }
+        },
+        {
+            "timestamp": 382121,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -43.4,
+                        "raw_y": -95.3,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -42.7,
+                        "raw_y": -107.3,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -41.7,
+                        "raw_y": -78.9,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -67.1,
+                        "raw_y": -91.6,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -18.7,
+                        "raw_y": -93.0,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -65.7,
+                        "raw_y": -104.7,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -21.2,
+                        "raw_y": -105.6,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -67.6,
+                        "raw_y": -77.7,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -18.3,
+                        "raw_y": -74.8,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 105.72,
+                    "y": -0.93759,
+                    "xx": -0.078253,
+                    "yy": -0.61283
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 4.6324,
+                    "y": 142.79,
+                    "xx": -0.72066,
+                    "yy": -1.7322
+                },
+                "gains": {
+                    "cx": 150.286,
+                    "lx": 146.702,
+                    "rx": 191.134,
+                    "cy": 475.247,
+                    "ty": 71.931,
+                    "by": 572.552
+                },
+                "corner_correction": {
+                    "q0_x": -3.5247e-05,
+                    "q0_y": -1.1294e-06,
+                    "q1_x": -8.2315e-05,
+                    "q1_y": 1.3359e-05,
+                    "q2_x": -6.9383e-05,
+                    "q2_y": -0.00010717,
+                    "q3_x": 4.3967e-05,
+                    "q3_y": 5.2463e-06
+                },
+                "prenorm_x": -43.431,
+                "prenorm_y": -95.343
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -50.6,
+                        "raw_y": -111.1,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -52.8,
+                        "raw_y": -124.0,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -47.5,
+                        "raw_y": -96.2,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -72.7,
+                        "raw_y": -110.2,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -28.3,
+                        "raw_y": -110.5,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -73.3,
+                        "raw_y": -125.3,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -31.9,
+                        "raw_y": -121.8,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -71.3,
+                        "raw_y": -93.5,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -27.5,
+                        "raw_y": -92.4,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 115.45,
+                    "y": -21.588,
+                    "xx": 0.01412,
+                    "yy": -0.16297
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 1.0987,
+                    "y": 139.77,
+                    "xx": -0.22833,
+                    "yy": -0.90139
+                },
+                "gains": {
+                    "cx": 132.917,
+                    "lx": 118.556,
+                    "rx": 183.658,
+                    "cy": 161.199,
+                    "ty": 57.46,
+                    "by": 174.444
+                },
+                "corner_correction": {
+                    "q0_x": -4.8179e-05,
+                    "q0_y": 6.6543e-05,
+                    "q1_x": -5.8949e-05,
+                    "q1_y": 7.5841e-05,
+                    "q2_x": -5.0115e-05,
+                    "q2_y": 3.0392e-05,
+                    "q3_x": 6.3351e-05,
+                    "q3_y": -6.4949e-05
+                },
+                "prenorm_x": -50.586,
+                "prenorm_y": -111.14
+            }
+        },
+        {
+            "timestamp": 445900,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "FAILED",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -45.4,
+                        "raw_y": -126.9,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -45.8,
+                        "raw_y": -138.9,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -46.0,
+                        "raw_y": -112.2,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -46.0,
+                        "raw_y": -137.4,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -21.2,
+                        "raw_y": -123.2,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -69.3,
+                        "raw_y": -135.6,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -23.3,
+                        "raw_y": -139.7,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -70.3,
+                        "raw_y": -107.3,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -21.3,
+                        "raw_y": -111.0,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 6711.2,
+                    "y": 15.287,
+                    "xx": -273.97,
+                    "yy": 19.054
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -4413.2,
+                    "y": 136.62,
+                    "xx": 182.16,
+                    "yy": -13.777
+                },
+                "gains": null,
+                "corner_correction": null,
+                "prenorm_x": -45.376,
+                "prenorm_y": -126.86
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -49.6,
+                        "raw_y": -207.9,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -53.4,
+                        "raw_y": -218.0,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -49.4,
+                        "raw_y": -195.0,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -53.4,
+                        "raw_y": -221.3,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -30.1,
+                        "raw_y": -200.5,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -76.5,
+                        "raw_y": -217.5,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -30.6,
+                        "raw_y": -216.0,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -70.9,
+                        "raw_y": -187.2,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -26.5,
+                        "raw_y": -187.9,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": -1079.2,
+                    "y": 285.38,
+                    "xx": 59.752,
+                    "yy": -21.084
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 1137.3,
+                    "y": -124.94,
+                    "xx": -58.926,
+                    "yy": 19.906
+                },
+                "gains": {
+                    "cx": 20695870.0,
+                    "lx": 2686114.75,
+                    "rx": 29519468.0,
+                    "cy": 41489780.0,
+                    "ty": 3286.979,
+                    "by": 31220710.0
+                },
+                "corner_correction": {
+                    "q0_x": 0.0,
+                    "q0_y": 0.0,
+                    "q1_x": 2.3297e-05,
+                    "q1_y": -2.2082e-05,
+                    "q2_x": -0.00074449,
+                    "q2_y": 0.00065429,
+                    "q3_x": -0.00096147,
+                    "q3_y": 0.00089622
+                },
+                "prenorm_x": -49.58,
+                "prenorm_y": -207.9
+            }
+        },
+        {
+            "timestamp": 463764,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -44.0,
+                        "raw_y": -112.1,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -45.7,
+                        "raw_y": -124.5,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -45.8,
+                        "raw_y": -97.9,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -68.9,
+                        "raw_y": -109.7,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -20.9,
+                        "raw_y": -112.1,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -66.9,
+                        "raw_y": -121.3,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -22.6,
+                        "raw_y": -124.7,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -69.1,
+                        "raw_y": -96.7,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -20.7,
+                        "raw_y": -99.3,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 107.14,
+                    "y": -1.1734,
+                    "xx": 0.17068,
+                    "yy": 1.0667
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 6.7042,
+                    "y": 145.6,
+                    "xx": -0.28874,
+                    "yy": -0.80191
+                },
+                "gains": {
+                    "cx": 158.264,
+                    "lx": 98.703,
+                    "rx": 250.298,
+                    "cy": 542.128,
+                    "ty": 141.463,
+                    "by": 611.986
+                },
+                "corner_correction": {
+                    "q0_x": -8.7129e-05,
+                    "q0_y": -5.8698e-05,
+                    "q1_x": -1.0277e-05,
+                    "q1_y": -1.5044e-06,
+                    "q2_x": 4.2249e-05,
+                    "q2_y": -4.8154e-05,
+                    "q3_x": -4.7214e-05,
+                    "q3_y": 3.2196e-05
+                },
+                "prenorm_x": -43.99,
+                "prenorm_y": -112.07
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -49.7,
+                        "raw_y": -144.2,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -51.6,
+                        "raw_y": -153.0,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -48.2,
+                        "raw_y": -125.9,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -71.3,
+                        "raw_y": -144.5,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -28.8,
+                        "raw_y": -139.3,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -72.7,
+                        "raw_y": -151.9,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -30.6,
+                        "raw_y": -147.4,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -67.7,
+                        "raw_y": -133.3,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -26.8,
+                        "raw_y": -131.0,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 122.88,
+                    "y": -21.11,
+                    "xx": 0.18523,
+                    "yy": 0.58112
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -20.717,
+                    "y": 186.17,
+                    "xx": -0.83204,
+                    "yy": -4.4365
+                },
+                "gains": {
+                    "cx": 5161.516,
+                    "lx": 4066.516,
+                    "rx": 6554.389,
+                    "cy": 17615.807,
+                    "ty": 119.438,
+                    "by": 17016.68
+                },
+                "corner_correction": {
+                    "q0_x": -1.8748e-05,
+                    "q0_y": -6.3651e-05,
+                    "q1_x": -3.3587e-05,
+                    "q1_y": 0.00017645,
+                    "q2_x": 5.6184e-05,
+                    "q2_y": -7.6866e-05,
+                    "q3_x": -0.00010026,
+                    "q3_y": 0.00052645
+                },
+                "prenorm_x": -49.729,
+                "prenorm_y": -144.16
+            }
+        },
+        {
+            "timestamp": 501884,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -38.6,
+                        "raw_y": -85.0,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -37.6,
+                        "raw_y": -94.6,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -36.3,
+                        "raw_y": -67.3,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -63.1,
+                        "raw_y": -83.8,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -13.8,
+                        "raw_y": -82.7,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -60.9,
+                        "raw_y": -92.9,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -15.0,
+                        "raw_y": -93.4,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -62.8,
+                        "raw_y": -67.5,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -13.5,
+                        "raw_y": -68.4,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 103.88,
+                    "y": 2.4608,
+                    "xx": -0.024326,
+                    "yy": -0.87951
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -3.5003,
+                    "y": 168.0,
+                    "xx": -0.46223,
+                    "yy": -3.4404
+                },
+                "gains": {
+                    "cx": 274.958,
+                    "lx": 308.266,
+                    "rx": 272.785,
+                    "cy": 1655.516,
+                    "ty": 52.177,
+                    "by": 2080.318
+                },
+                "corner_correction": {
+                    "q0_x": -4.918e-05,
+                    "q0_y": -5.923e-05,
+                    "q1_x": -5.3108e-05,
+                    "q1_y": -1.1119e-05,
+                    "q2_x": -5.1059e-05,
+                    "q2_y": -3.9796e-05,
+                    "q3_x": 3.8297e-05,
+                    "q3_y": 0.0001209
+                },
+                "prenorm_x": -38.571,
+                "prenorm_y": -84.98
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -54.3,
+                        "raw_y": -106.7,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -56.1,
+                        "raw_y": -118.9,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -51.4,
+                        "raw_y": -90.4,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -76.9,
+                        "raw_y": -107.7,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -31.0,
+                        "raw_y": -104.1,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -80.1,
+                        "raw_y": -118.6,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -34.0,
+                        "raw_y": -118.1,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -75.0,
+                        "raw_y": -91.1,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -29.7,
+                        "raw_y": -89.4,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 113.08,
+                    "y": -18.378,
+                    "xx": -0.051046,
+                    "yy": -0.1165
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -10.682,
+                    "y": 142.57,
+                    "xx": -0.19075,
+                    "yy": -1.5203
+                },
+                "gains": {
+                    "cx": 151.801,
+                    "lx": 74.772,
+                    "rx": 158.116,
+                    "cy": 340.607,
+                    "ty": 70.893,
+                    "by": 427.631
+                },
+                "corner_correction": {
+                    "q0_x": 2.9923e-05,
+                    "q0_y": -3.6235e-05,
+                    "q1_x": -2.5349e-05,
+                    "q1_y": -3.4253e-05,
+                    "q2_x": -2.8097e-05,
+                    "q2_y": 1.8929e-05,
+                    "q3_x": 3.1536e-05,
+                    "q3_y": 6.5557e-05
+                },
+                "prenorm_x": -54.305,
+                "prenorm_y": -106.67
+            }
+        },
+        {
+            "timestamp": 581427,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -50.5,
+                        "raw_y": -89.8,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -51.7,
+                        "raw_y": -102.5,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -49.7,
+                        "raw_y": -73.7,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -76.4,
+                        "raw_y": -86.5,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -24.6,
+                        "raw_y": -89.1,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -76.9,
+                        "raw_y": -100.9,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -25.3,
+                        "raw_y": -102.8,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -77.2,
+                        "raw_y": -72.0,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -24.2,
+                        "raw_y": -73.1,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 98.61,
+                    "y": -7.4832,
+                    "xx": 0.017695,
+                    "yy": 0.14218
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 6.4278,
+                    "y": 137.22,
+                    "xx": -0.39668,
+                    "yy": -1.2647
+                },
+                "gains": {
+                    "cx": 101.545,
+                    "lx": 98.23,
+                    "rx": 104.298,
+                    "cy": 151.434,
+                    "ty": 71.816,
+                    "by": 188.188
+                },
+                "corner_correction": {
+                    "q0_x": -2.3243e-05,
+                    "q0_y": 3.4651e-05,
+                    "q1_x": 2.9125e-06,
+                    "q1_y": -2.484e-05,
+                    "q2_x": -4.3154e-05,
+                    "q2_y": -6.8733e-05,
+                    "q3_x": 2.127e-07,
+                    "q3_y": 1.1856e-05
+                },
+                "prenorm_x": -50.542,
+                "prenorm_y": -89.786
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -32.9,
+                        "raw_y": -76.1,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -35.6,
+                        "raw_y": -89.7,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -30.4,
+                        "raw_y": -60.4,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -57.7,
+                        "raw_y": -75.7,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -9.0,
+                        "raw_y": -72.9,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -59.9,
+                        "raw_y": -90.1,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -9.0,
+                        "raw_y": -90.9,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -55.7,
+                        "raw_y": -61.2,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -7.0,
+                        "raw_y": -58.8,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 106.33,
+                    "y": -19.191,
+                    "xx": 0.13812,
+                    "yy": 0.1569
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -7.806,
+                    "y": 133.74,
+                    "xx": -0.40743,
+                    "yy": -0.76518
+                },
+                "gains": {
+                    "cx": 113.11,
+                    "lx": 97.978,
+                    "rx": 150.283,
+                    "cy": 36.614,
+                    "ty": 150.645,
+                    "by": 58.271
+                },
+                "corner_correction": {
+                    "q0_x": -2.5302e-05,
+                    "q0_y": 3.1155e-05,
+                    "q1_x": 4.3595e-05,
+                    "q1_y": -8.1394e-05,
+                    "q2_x": -1.8031e-05,
+                    "q2_y": -2.1405e-05,
+                    "q3_x": -8.9996e-06,
+                    "q3_y": 6.7204e-05
+                },
+                "prenorm_x": -32.883,
+                "prenorm_y": -76.105
+            }
+        },
+        {
+            "timestamp": 661940,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -53.8,
+                        "raw_y": -99.7,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -54.1,
+                        "raw_y": -113.7,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -52.4,
+                        "raw_y": -82.2,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -80.2,
+                        "raw_y": -96.0,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -26.9,
+                        "raw_y": -99.1,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -80.7,
+                        "raw_y": -111.4,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -27.2,
+                        "raw_y": -113.9,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -79.2,
+                        "raw_y": -80.8,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -26.7,
+                        "raw_y": -81.7,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 95.825,
+                    "y": -4.2992,
+                    "xx": -0.021138,
+                    "yy": -0.18579
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 7.191,
+                    "y": 125.26,
+                    "xx": -0.37806,
+                    "yy": -1.0239
+                },
+                "gains": {
+                    "cx": 102.718,
+                    "lx": 97.937,
+                    "rx": 115.085,
+                    "cy": 175.181,
+                    "ty": 70.771,
+                    "by": 233.484
+                },
+                "corner_correction": {
+                    "q0_x": -7.86e-06,
+                    "q0_y": 2.1791e-05,
+                    "q1_x": -8.3987e-06,
+                    "q1_y": -2.1362e-05,
+                    "q2_x": -1.8799e-05,
+                    "q2_y": -7.5914e-05,
+                    "q3_x": 1.7267e-05,
+                    "q3_y": 1.0127e-05
+                },
+                "prenorm_x": -53.822,
+                "prenorm_y": -99.698
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -33.4,
+                        "raw_y": -75.3,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -36.2,
+                        "raw_y": -88.5,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -31.9,
+                        "raw_y": -60.0,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -59.2,
+                        "raw_y": -75.8,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -9.6,
+                        "raw_y": -72.5,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -62.0,
+                        "raw_y": -89.2,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -9.2,
+                        "raw_y": -89.3,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -56.9,
+                        "raw_y": -59.8,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -8.3,
+                        "raw_y": -58.5,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 104.74,
+                    "y": -16.597,
+                    "xx": 0.1916,
+                    "yy": 0.40399
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -9.4483,
+                    "y": 137.92,
+                    "xx": -0.26473,
+                    "yy": -0.87661
+                },
+                "gains": {
+                    "cx": 114.878,
+                    "lx": 97.983,
+                    "rx": 148.39,
+                    "cy": 87.018,
+                    "ty": 142.568,
+                    "by": 117.293
+                },
+                "corner_correction": {
+                    "q0_x": -1.4847e-05,
+                    "q0_y": 1.4758e-05,
+                    "q1_x": 4.7465e-05,
+                    "q1_y": -7.2219e-05,
+                    "q2_x": 9.8389e-07,
+                    "q2_y": 2.3995e-05,
+                    "q3_x": -1.6087e-05,
+                    "q3_y": 5.1241e-05
+                },
+                "prenorm_x": -33.4,
+                "prenorm_y": -75.315
+            }
+        },
+        {
+            "timestamp": 882232,
+            "calibration_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": null,
+            "left_eye": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -48.9,
+                        "raw_y": -81.1,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -49.4,
+                        "raw_y": -94.6,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -48.0,
+                        "raw_y": -64.6,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -75.6,
+                        "raw_y": -78.3,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -22.0,
+                        "raw_y": -80.3,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -75.3,
+                        "raw_y": -93.2,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -22.8,
+                        "raw_y": -95.2,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -74.5,
+                        "raw_y": -63.5,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -21.4,
+                        "raw_y": -64.7,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 95.549,
+                    "y": -4.1043,
+                    "xx": 0.0027171,
+                    "yy": -0.045451
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": 4.982,
+                    "y": 130.78,
+                    "xx": -0.31396,
+                    "yy": -0.98128
+                },
+                "gains": {
+                    "cx": 101.829,
+                    "lx": 94.65,
+                    "rx": 111.442,
+                    "cy": 107.174,
+                    "ty": 91.71,
+                    "by": 124.799
+                },
+                "corner_correction": {
+                    "q0_x": -2.4517e-05,
+                    "q0_y": 2.758e-05,
+                    "q1_x": -1.2208e-05,
+                    "q1_y": -3.3177e-05,
+                    "q2_x": -3.5849e-06,
+                    "q2_y": -5.2874e-05,
+                    "q3_x": -4.905e-06,
+                    "q3_y": 2.5058e-05
+                },
+                "prenorm_x": -48.861,
+                "prenorm_y": -81.05
+            },
+            "right_eye": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "points": [
+                    {
+                        "point_number": 1,
+                        "raw_x": -36.1,
+                        "raw_y": -79.1,
+                        "href_x": -0.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 2,
+                        "raw_x": -38.4,
+                        "raw_y": -94.2,
+                        "href_x": -0.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 3,
+                        "raw_x": -33.9,
+                        "raw_y": -63.7,
+                        "href_x": -0.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 4,
+                        "raw_x": -61.6,
+                        "raw_y": -79.2,
+                        "href_x": -2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 5,
+                        "raw_x": -12.2,
+                        "raw_y": -76.0,
+                        "href_x": 2562.0,
+                        "href_y": 116.0
+                    },
+                    {
+                        "point_number": 6,
+                        "raw_x": -63.1,
+                        "raw_y": -93.6,
+                        "href_x": -2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 7,
+                        "raw_x": -11.4,
+                        "raw_y": -96.3,
+                        "href_x": 2605.0,
+                        "href_y": -1832.0
+                    },
+                    {
+                        "point_number": 8,
+                        "raw_x": -59.4,
+                        "raw_y": -63.3,
+                        "href_x": -2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 9,
+                        "raw_x": -9.3,
+                        "raw_y": -61.6,
+                        "href_x": 2521.0,
+                        "href_y": 2003.0
+                    },
+                    {
+                        "point_number": 10,
+                        "raw_x": 0.0,
+                        "raw_y": 0.0,
+                        "href_x": 0.0,
+                        "href_y": 0.0
+                    }
+                ],
+                "polynomial_x": {
+                    "const": -0.0,
+                    "x": 105.06,
+                    "y": -15.558,
+                    "xx": 0.18429,
+                    "yy": 0.044154
+                },
+                "polynomial_y": {
+                    "const": 116.47,
+                    "x": -8.6906,
+                    "y": 127.1,
+                    "xx": -0.33045,
+                    "yy": -0.21712
+                },
+                "gains": {
+                    "cx": 81.055,
+                    "lx": 92.642,
+                    "rx": 115.494,
+                    "cy": 89.108,
+                    "ty": 150.319,
+                    "by": 81.697
+                },
+                "corner_correction": {
+                    "q0_x": -2.8242e-05,
+                    "q0_y": -1.2047e-05,
+                    "q1_x": 4.7429e-05,
+                    "q1_y": -8.9951e-05,
+                    "q2_x": -1.1978e-05,
+                    "q2_y": 1.9714e-05,
+                    "q3_x": -3.5616e-05,
+                    "q3_y": 4.384e-05
+                },
+                "prenorm_x": -36.068,
+                "prenorm_y": -79.139
+            }
+        }
+    ],
+    "validations": [
+        {
+            "timestamp": 408589,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "error_avg_deg": 0.52,
+                "error_max_deg": 1.3,
+                "offset_deg": 0.48,
+                "offset_pix_x": -9.5,
+                "offset_pix_y": -26.4,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "error_avg_deg": 1.0,
+                "error_max_deg": 1.41,
+                "offset_deg": 0.94,
+                "offset_pix_x": 21.7,
+                "offset_pix_y": -50.4,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 0.27,
+                    "offset_pix_x": -8.4,
+                    "offset_pix_y": -13.6,
+                    "gaze_x": 631.6,
+                    "gaze_y": 498.4
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.41,
+                    "offset_pix_x": 42.7,
+                    "offset_pix_y": -70.3,
+                    "gaze_x": 682.7,
+                    "gaze_y": 441.7
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 1.13,
+                    "offset_pix_x": -25.6,
+                    "offset_pix_y": -61.0,
+                    "gaze_x": 614.4,
+                    "gaze_y": 26.0
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.44,
+                    "offset_pix_x": -14.4,
+                    "offset_pix_y": -21.6,
+                    "gaze_x": 625.6,
+                    "gaze_y": 65.4
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.24,
+                    "offset_pix_x": -13.9,
+                    "offset_pix_y": -1.4,
+                    "gaze_x": 626.1,
+                    "gaze_y": 934.6
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": -17.2,
+                    "offset_pix_y": -0.4,
+                    "gaze_x": 622.8,
+                    "gaze_y": 935.6
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 1.3,
+                    "offset_pix_x": -14.6,
+                    "offset_pix_y": -74.9,
+                    "gaze_x": 62.4,
+                    "gaze_y": 437.1
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.98,
+                    "offset_pix_x": 9.3,
+                    "offset_pix_y": -56.4,
+                    "gaze_x": 86.3,
+                    "gaze_y": 455.6
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.13,
+                    "offset_pix_x": -6.4,
+                    "offset_pix_y": -4.2,
+                    "gaze_x": 1195.6,
+                    "gaze_y": 507.8
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.58,
+                    "offset_pix_x": 13.5,
+                    "offset_pix_y": -31.2,
+                    "gaze_x": 1215.5,
+                    "gaze_y": 480.8
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 1.17,
+                    "offset_pix_x": -0.8,
+                    "offset_pix_y": -68.3,
+                    "gaze_x": 143.2,
+                    "gaze_y": 69.7
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": -2.6,
+                    "offset_pix_y": -17.0,
+                    "gaze_x": 141.4,
+                    "gaze_y": 121.0
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 0.47,
+                    "offset_pix_x": -17.6,
+                    "offset_pix_y": -21.3,
+                    "gaze_x": 1117.4,
+                    "gaze_y": 116.7
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.55,
+                    "offset_pix_x": 1.3,
+                    "offset_pix_y": -32.3,
+                    "gaze_x": 1136.3,
+                    "gaze_y": 105.7
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 0.74,
+                    "offset_pix_x": 13.9,
+                    "offset_pix_y": -41.1,
+                    "gaze_x": 157.9,
+                    "gaze_y": 843.9
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.48,
+                    "offset_pix_x": 2.4,
+                    "offset_pix_y": -27.7,
+                    "gaze_x": 146.4,
+                    "gaze_y": 857.3
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.12,
+                    "offset_pix_x": -1.1,
+                    "offset_pix_y": 6.8,
+                    "gaze_x": 1133.9,
+                    "gaze_y": 891.8
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.11,
+                    "offset_pix_x": 35.7,
+                    "offset_pix_y": -54.0,
+                    "gaze_x": 1170.7,
+                    "gaze_y": 831.0
+                }
+            ]
+        },
+        {
+            "timestamp": 517872,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "POOR",
+                "error_avg_deg": 0.7,
+                "error_max_deg": 2.44,
+                "offset_deg": 0.36,
+                "offset_pix_x": -15.4,
+                "offset_pix_y": -14.4,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "FAIR",
+                "error_avg_deg": 0.64,
+                "error_max_deg": 1.64,
+                "offset_deg": 0.54,
+                "offset_pix_x": 9.3,
+                "offset_pix_y": -30.2,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 0.51,
+                    "offset_pix_x": -8.8,
+                    "offset_pix_y": -28.6,
+                    "gaze_x": 631.2,
+                    "gaze_y": 483.4
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.48,
+                    "offset_pix_x": 8.4,
+                    "offset_pix_y": -26.7,
+                    "gaze_x": 648.4,
+                    "gaze_y": 485.3
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": -9.4,
+                    "offset_pix_y": 14.1,
+                    "gaze_x": 630.6,
+                    "gaze_y": 101.1
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.87,
+                    "offset_pix_x": 25.9,
+                    "offset_pix_y": -43.9,
+                    "gaze_x": 665.9,
+                    "gaze_y": 43.1
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.69,
+                    "offset_pix_x": -39.6,
+                    "offset_pix_y": -4.7,
+                    "gaze_x": 600.4,
+                    "gaze_y": 931.3
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.29,
+                    "offset_pix_x": -1.6,
+                    "offset_pix_y": -75.2,
+                    "gaze_x": 638.4,
+                    "gaze_y": 860.8
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 0.61,
+                    "offset_pix_x": 23.2,
+                    "offset_pix_y": 27.0,
+                    "gaze_x": 100.2,
+                    "gaze_y": 539.0
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.21,
+                    "offset_pix_x": 3.0,
+                    "offset_pix_y": 11.8,
+                    "gaze_x": 80.0,
+                    "gaze_y": 523.8
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.83,
+                    "offset_pix_x": -4.2,
+                    "offset_pix_y": 48.3,
+                    "gaze_x": 1197.8,
+                    "gaze_y": 560.3
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.13,
+                    "offset_pix_x": 7.3,
+                    "offset_pix_y": -2.6,
+                    "gaze_x": 1209.3,
+                    "gaze_y": 509.4
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 2.44,
+                    "offset_pix_x": -93.0,
+                    "offset_pix_y": -107.5,
+                    "gaze_x": 51.0,
+                    "gaze_y": 30.5
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.64,
+                    "offset_pix_x": -3.0,
+                    "offset_pix_y": -95.5,
+                    "gaze_x": 141.0,
+                    "gaze_y": 42.5
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 0.53,
+                    "offset_pix_x": -14.9,
+                    "offset_pix_y": -27.0,
+                    "gaze_x": 1120.1,
+                    "gaze_y": 111.0
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.16,
+                    "offset_pix_x": -8.4,
+                    "offset_pix_y": -4.6,
+                    "gaze_x": 1126.6,
+                    "gaze_y": 133.4
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 0.52,
+                    "offset_pix_x": -10.1,
+                    "offset_pix_y": 28.8,
+                    "gaze_x": 133.9,
+                    "gaze_y": 913.8
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.75,
+                    "offset_pix_x": 15.8,
+                    "offset_pix_y": -41.0,
+                    "gaze_x": 159.8,
+                    "gaze_y": 844.0
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.48,
+                    "offset_pix_x": -9.1,
+                    "offset_pix_y": 26.8,
+                    "gaze_x": 1125.9,
+                    "gaze_y": 911.8
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.12,
+                    "offset_pix_x": 61.6,
+                    "offset_pix_y": 21.2,
+                    "gaze_x": 1196.6,
+                    "gaze_y": 906.2
+                }
+            ]
+        },
+        {
+            "timestamp": 603488,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "error_avg_deg": 0.27,
+                "error_max_deg": 0.59,
+                "offset_deg": 0.24,
+                "offset_pix_x": -13.1,
+                "offset_pix_y": -4.4,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "error_avg_deg": 0.43,
+                "error_max_deg": 0.9,
+                "offset_deg": 0.36,
+                "offset_pix_x": 9.1,
+                "offset_pix_y": 18.8,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 0.16,
+                    "offset_pix_x": -8.4,
+                    "offset_pix_y": 3.4,
+                    "gaze_x": 631.6,
+                    "gaze_y": 515.4
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.37,
+                    "offset_pix_x": 17.4,
+                    "offset_pix_y": 13.0,
+                    "gaze_x": 657.4,
+                    "gaze_y": 525.0
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 0.25,
+                    "offset_pix_x": -13.6,
+                    "offset_pix_y": -5.6,
+                    "gaze_x": 626.4,
+                    "gaze_y": 81.4
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.7,
+                    "offset_pix_x": 9.2,
+                    "offset_pix_y": 39.7,
+                    "gaze_x": 649.2,
+                    "gaze_y": 126.7
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.48,
+                    "offset_pix_x": -23.5,
+                    "offset_pix_y": -15.7,
+                    "gaze_x": 616.5,
+                    "gaze_y": 920.3
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.16,
+                    "offset_pix_x": -9.1,
+                    "offset_pix_y": 1.9,
+                    "gaze_x": 630.9,
+                    "gaze_y": 937.9
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": -9.9,
+                    "offset_pix_y": -13.4,
+                    "gaze_x": 67.1,
+                    "gaze_y": 498.6
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.42,
+                    "offset_pix_x": 19.2,
+                    "offset_pix_y": 15.0,
+                    "gaze_x": 96.2,
+                    "gaze_y": 527.0
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.45,
+                    "offset_pix_x": -16.4,
+                    "offset_pix_y": -20.7,
+                    "gaze_x": 1185.6,
+                    "gaze_y": 491.3
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.27,
+                    "offset_pix_x": 2.8,
+                    "offset_pix_y": 15.3,
+                    "gaze_x": 1204.8,
+                    "gaze_y": 527.3
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 0.11,
+                    "offset_pix_x": -6.4,
+                    "offset_pix_y": -1.3,
+                    "gaze_x": 137.6,
+                    "gaze_y": 136.7
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.9,
+                    "offset_pix_x": 33.9,
+                    "offset_pix_y": 40.2,
+                    "gaze_x": 177.9,
+                    "gaze_y": 178.2
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 0.2,
+                    "offset_pix_x": -10.3,
+                    "offset_pix_y": 5.8,
+                    "gaze_x": 1124.7,
+                    "gaze_y": 143.8
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.85,
+                    "offset_pix_x": -17.5,
+                    "offset_pix_y": 46.5,
+                    "gaze_x": 1117.5,
+                    "gaze_y": 184.5
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 0.32,
+                    "offset_pix_x": -17.4,
+                    "offset_pix_y": -6.4,
+                    "gaze_x": 126.6,
+                    "gaze_y": 878.6
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.39,
+                    "offset_pix_x": -4.8,
+                    "offset_pix_y": 22.6,
+                    "gaze_x": 139.2,
+                    "gaze_y": 907.6
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.59,
+                    "offset_pix_x": -34.3,
+                    "offset_pix_y": -3.1,
+                    "gaze_x": 1100.7,
+                    "gaze_y": 881.9
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.4,
+                    "offset_pix_x": -12.6,
+                    "offset_pix_y": 19.5,
+                    "gaze_x": 1122.4,
+                    "gaze_y": 904.5
+                }
+            ]
+        },
+        {
+            "timestamp": 678735,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "error_avg_deg": 0.25,
+                "error_max_deg": 0.52,
+                "offset_deg": 0.19,
+                "offset_pix_x": -6.9,
+                "offset_pix_y": -8.7,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "error_avg_deg": 0.51,
+                "error_max_deg": 0.68,
+                "offset_deg": 0.45,
+                "offset_pix_x": -18.8,
+                "offset_pix_y": 18.0,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 0.22,
+                    "offset_pix_x": -6.6,
+                    "offset_pix_y": -11.0,
+                    "gaze_x": 633.4,
+                    "gaze_y": 501.0
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.66,
+                    "offset_pix_x": -28.1,
+                    "offset_pix_y": 26.6,
+                    "gaze_x": 611.9,
+                    "gaze_y": 538.6
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 0.32,
+                    "offset_pix_x": -12.2,
+                    "offset_pix_y": -14.0,
+                    "gaze_x": 627.8,
+                    "gaze_y": 73.0
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.28,
+                    "offset_pix_x": -14.9,
+                    "offset_pix_y": -7.2,
+                    "gaze_x": 625.1,
+                    "gaze_y": 79.8
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.18,
+                    "offset_pix_x": -9.1,
+                    "offset_pix_y": -4.8,
+                    "gaze_x": 630.9,
+                    "gaze_y": 931.2
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.14,
+                    "offset_pix_x": -7.2,
+                    "offset_pix_y": -4.2,
+                    "gaze_x": 632.8,
+                    "gaze_y": 931.8
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 0.16,
+                    "offset_pix_x": 7.6,
+                    "offset_pix_y": -5.8,
+                    "gaze_x": 84.6,
+                    "gaze_y": 506.2
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.37,
+                    "offset_pix_x": -7.9,
+                    "offset_pix_y": 19.9,
+                    "gaze_x": 69.1,
+                    "gaze_y": 531.9
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.17,
+                    "offset_pix_x": -9.7,
+                    "offset_pix_y": 0.4,
+                    "gaze_x": 1192.3,
+                    "gaze_y": 512.4
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.64,
+                    "offset_pix_x": -16.9,
+                    "offset_pix_y": 33.4,
+                    "gaze_x": 1185.1,
+                    "gaze_y": 545.4
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 0.39,
+                    "offset_pix_x": -9.1,
+                    "offset_pix_y": 20.8,
+                    "gaze_x": 134.9,
+                    "gaze_y": 158.8
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.68,
+                    "offset_pix_x": -3.0,
+                    "offset_pix_y": 39.7,
+                    "gaze_x": 141.0,
+                    "gaze_y": 177.7
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 0.52,
+                    "offset_pix_x": -14.0,
+                    "offset_pix_y": -27.3,
+                    "gaze_x": 1121.0,
+                    "gaze_y": 110.7
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.43,
+                    "offset_pix_x": -25.1,
+                    "offset_pix_y": -1.6,
+                    "gaze_x": 1109.9,
+                    "gaze_y": 136.4
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 0.52,
+                    "offset_pix_x": -20.6,
+                    "offset_pix_y": -22.2,
+                    "gaze_x": 123.4,
+                    "gaze_y": 862.8
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.52,
+                    "offset_pix_x": -29.6,
+                    "offset_pix_y": 7.1,
+                    "gaze_x": 114.4,
+                    "gaze_y": 892.1
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.16,
+                    "offset_pix_x": 4.9,
+                    "offset_pix_y": -8.3,
+                    "gaze_x": 1139.9,
+                    "gaze_y": 876.7
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.33,
+                    "offset_pix_x": 0.7,
+                    "offset_pix_y": 19.3,
+                    "gaze_x": 1135.7,
+                    "gaze_y": 904.3
+                }
+            ]
+        },
+        {
+            "timestamp": 793256,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "error_avg_deg": 0.84,
+                "error_max_deg": 1.14,
+                "offset_deg": 0.81,
+                "offset_pix_x": -29.8,
+                "offset_pix_y": -36.6,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "error_avg_deg": 0.38,
+                "error_max_deg": 0.97,
+                "offset_deg": 0.31,
+                "offset_pix_x": -18.2,
+                "offset_pix_y": -0.5,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 1.05,
+                    "offset_pix_x": -33.8,
+                    "offset_pix_y": -51.2,
+                    "gaze_x": 606.2,
+                    "gaze_y": 460.8
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.21,
+                    "offset_pix_x": -11.2,
+                    "offset_pix_y": -4.8,
+                    "gaze_x": 628.8,
+                    "gaze_y": 507.2
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 0.51,
+                    "offset_pix_x": -22.3,
+                    "offset_pix_y": -19.7,
+                    "gaze_x": 617.7,
+                    "gaze_y": 67.3
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.54,
+                    "offset_pix_x": -15.3,
+                    "offset_pix_y": -27.4,
+                    "gaze_x": 624.7,
+                    "gaze_y": 59.6
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.35,
+                    "offset_pix_x": -20.5,
+                    "offset_pix_y": 0.9,
+                    "gaze_x": 619.5,
+                    "gaze_y": 936.9
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.62,
+                    "offset_pix_x": -35.3,
+                    "offset_pix_y": -7.7,
+                    "gaze_x": 604.7,
+                    "gaze_y": 928.3
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 0.58,
+                    "offset_pix_x": -13.2,
+                    "offset_pix_y": -31.4,
+                    "gaze_x": 63.8,
+                    "gaze_y": 480.6
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.53,
+                    "offset_pix_x": -29.6,
+                    "offset_pix_y": 9.5,
+                    "gaze_x": 47.4,
+                    "gaze_y": 521.5
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.73,
+                    "offset_pix_x": -25.0,
+                    "offset_pix_y": -34.7,
+                    "gaze_x": 1177.0,
+                    "gaze_y": 477.3
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.42,
+                    "offset_pix_x": -24.5,
+                    "offset_pix_y": -1.5,
+                    "gaze_x": 1177.5,
+                    "gaze_y": 510.5
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 0.41,
+                    "offset_pix_x": -11.8,
+                    "offset_pix_y": -20.8,
+                    "gaze_x": 132.2,
+                    "gaze_y": 117.2
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": -4.8,
+                    "offset_pix_y": 16.2,
+                    "gaze_x": 139.2,
+                    "gaze_y": 154.2
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 1.14,
+                    "offset_pix_x": -54.1,
+                    "offset_pix_y": -38.2,
+                    "gaze_x": 1080.9,
+                    "gaze_y": 99.8
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.97,
+                    "offset_pix_x": -36.8,
+                    "offset_pix_y": 43.3,
+                    "gaze_x": 1098.2,
+                    "gaze_y": 181.3
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 1.01,
+                    "offset_pix_x": -45.0,
+                    "offset_pix_y": -37.8,
+                    "gaze_x": 99.0,
+                    "gaze_y": 847.2
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.46,
+                    "offset_pix_x": -25.8,
+                    "offset_pix_y": -7.5,
+                    "gaze_x": 118.2,
+                    "gaze_y": 877.5
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.25,
+                    "offset_pix_x": -13.5,
+                    "offset_pix_y": 4.9,
+                    "gaze_x": 1121.5,
+                    "gaze_y": 889.9
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.13,
+                    "offset_pix_x": -6.6,
+                    "offset_pix_y": 4.0,
+                    "gaze_x": 1128.4,
+                    "gaze_y": 889.0
+                }
+            ]
+        },
+        {
+            "timestamp": 824704,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "error_avg_deg": 0.75,
+                "error_max_deg": 1.17,
+                "offset_deg": 0.72,
+                "offset_pix_x": -15.1,
+                "offset_pix_y": -39.4,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "error_avg_deg": 0.29,
+                "error_max_deg": 1.0,
+                "offset_deg": 0.26,
+                "offset_pix_x": -4.9,
+                "offset_pix_y": 14.2,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 0.83,
+                    "offset_pix_x": -16.5,
+                    "offset_pix_y": -45.7,
+                    "gaze_x": 623.5,
+                    "gaze_y": 466.3
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.25,
+                    "offset_pix_x": -10.0,
+                    "offset_pix_y": 10.2,
+                    "gaze_x": 630.0,
+                    "gaze_y": 522.2
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 0.46,
+                    "offset_pix_x": -19.9,
+                    "offset_pix_y": -18.2,
+                    "gaze_x": 620.1,
+                    "gaze_y": 68.8
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.18,
+                    "offset_pix_x": -0.4,
+                    "offset_pix_y": 10.6,
+                    "gaze_x": 639.6,
+                    "gaze_y": 97.6
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.72,
+                    "offset_pix_x": -33.0,
+                    "offset_pix_y": -25.8,
+                    "gaze_x": 607.0,
+                    "gaze_y": 910.2
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.13,
+                    "offset_pix_x": 6.4,
+                    "offset_pix_y": 3.9,
+                    "gaze_x": 646.4,
+                    "gaze_y": 939.9
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 1.09,
+                    "offset_pix_x": -4.2,
+                    "offset_pix_y": -63.6,
+                    "gaze_x": 72.8,
+                    "gaze_y": 448.4
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.39,
+                    "offset_pix_x": -3.1,
+                    "offset_pix_y": 22.3,
+                    "gaze_x": 73.9,
+                    "gaze_y": 534.3
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.37,
+                    "offset_pix_x": -14.3,
+                    "offset_pix_y": -15.9,
+                    "gaze_x": 1187.7,
+                    "gaze_y": 496.1
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.12,
+                    "offset_pix_x": 5.4,
+                    "offset_pix_y": 4.9,
+                    "gaze_x": 1207.4,
+                    "gaze_y": 516.9
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 0.03,
+                    "offset_pix_x": 1.5,
+                    "offset_pix_y": 1.2,
+                    "gaze_x": 145.5,
+                    "gaze_y": 139.2
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.88,
+                    "offset_pix_x": 11.0,
+                    "offset_pix_y": 50.2,
+                    "gaze_x": 155.0,
+                    "gaze_y": 188.2
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 0.63,
+                    "offset_pix_x": -23.0,
+                    "offset_pix_y": -28.8,
+                    "gaze_x": 1112.0,
+                    "gaze_y": 109.2
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.0,
+                    "offset_pix_x": -25.9,
+                    "offset_pix_y": 52.1,
+                    "gaze_x": 1109.1,
+                    "gaze_y": 190.1
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 1.17,
+                    "offset_pix_x": -27.8,
+                    "offset_pix_y": -62.2,
+                    "gaze_x": 116.2,
+                    "gaze_y": 822.8
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.2,
+                    "offset_pix_x": -7.5,
+                    "offset_pix_y": 8.8,
+                    "gaze_x": 136.5,
+                    "gaze_y": 893.8
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.24,
+                    "offset_pix_x": 6.1,
+                    "offset_pix_y": -12.8,
+                    "gaze_x": 1141.1,
+                    "gaze_y": 872.2
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.16,
+                    "offset_pix_x": 4.4,
+                    "offset_pix_y": 8.0,
+                    "gaze_x": 1139.4,
+                    "gaze_y": 893.0
+                }
+            ]
+        },
+        {
+            "timestamp": 860953,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "POOR",
+                "error_avg_deg": 3.62,
+                "error_max_deg": 3.85,
+                "offset_deg": 3.6,
+                "offset_pix_x": 38.2,
+                "offset_pix_y": 208.4,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "POOR",
+                "error_avg_deg": 1.65,
+                "error_max_deg": 2.09,
+                "offset_deg": 1.61,
+                "offset_pix_x": -81.4,
+                "offset_pix_y": -47.6,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 3.71,
+                    "offset_pix_x": 47.0,
+                    "offset_pix_y": 213.4,
+                    "gaze_x": 687.0,
+                    "gaze_y": 725.4
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.64,
+                    "offset_pix_x": -85.2,
+                    "offset_pix_y": -43.6,
+                    "gaze_x": 554.8,
+                    "gaze_y": 468.4
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 3.85,
+                    "offset_pix_x": 32.2,
+                    "offset_pix_y": 224.6,
+                    "gaze_x": 672.2,
+                    "gaze_y": 311.6
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 2.09,
+                    "offset_pix_x": -77.8,
+                    "offset_pix_y": -95.0,
+                    "gaze_x": 562.2,
+                    "gaze_y": -8.0
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 2.81,
+                    "offset_pix_x": 5.8,
+                    "offset_pix_y": 165.4,
+                    "gaze_x": 645.8,
+                    "gaze_y": 1101.4
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.38,
+                    "offset_pix_x": -74.8,
+                    "offset_pix_y": -30.7,
+                    "gaze_x": 565.2,
+                    "gaze_y": 905.3
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 3.66,
+                    "offset_pix_x": 0.5,
+                    "offset_pix_y": 215.8,
+                    "gaze_x": 77.5,
+                    "gaze_y": 727.8
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.67,
+                    "offset_pix_x": -94.9,
+                    "offset_pix_y": -23.1,
+                    "gaze_x": -17.900000000000006,
+                    "gaze_y": 488.9
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 3.68,
+                    "offset_pix_x": 81.7,
+                    "offset_pix_y": 200.7,
+                    "gaze_x": 1283.7,
+                    "gaze_y": 712.7
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.16,
+                    "offset_pix_x": -63.8,
+                    "offset_pix_y": -22.9,
+                    "gaze_x": 1138.2,
+                    "gaze_y": 489.1
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 3.69,
+                    "offset_pix_x": 21.4,
+                    "offset_pix_y": 216.4,
+                    "gaze_x": 165.4,
+                    "gaze_y": 354.4
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.84,
+                    "offset_pix_x": -90.3,
+                    "offset_pix_y": -58.2,
+                    "gaze_x": 53.7,
+                    "gaze_y": 79.8
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 3.52,
+                    "offset_pix_x": 60.4,
+                    "offset_pix_y": 198.2,
+                    "gaze_x": 1195.4,
+                    "gaze_y": 336.2
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.58,
+                    "offset_pix_x": -68.4,
+                    "offset_pix_y": -62.7,
+                    "gaze_x": 1066.6,
+                    "gaze_y": 75.3
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 3.52,
+                    "offset_pix_x": -8.8,
+                    "offset_pix_y": 207.4,
+                    "gaze_x": 135.2,
+                    "gaze_y": 1092.4
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 2.08,
+                    "offset_pix_x": -116.8,
+                    "offset_pix_y": -33.1,
+                    "gaze_x": 27.200000000000003,
+                    "gaze_y": 851.9
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 3.09,
+                    "offset_pix_x": 51.6,
+                    "offset_pix_y": 174.4,
+                    "gaze_x": 1186.6,
+                    "gaze_y": 1059.4
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.84,
+                    "offset_pix_x": -40.7,
+                    "offset_pix_y": -27.6,
+                    "gaze_x": 1094.3,
+                    "gaze_y": 857.4
+                }
+            ]
+        },
+        {
+            "timestamp": 897848,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "error_avg_deg": 0.21,
+                "error_max_deg": 0.32,
+                "offset_deg": 0.04,
+                "offset_pix_x": 1.7,
+                "offset_pix_y": 1.6,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "error_avg_deg": 0.2,
+                "error_max_deg": 0.76,
+                "offset_deg": 0.02,
+                "offset_pix_x": 0.9,
+                "offset_pix_y": 1.0,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 0.26,
+                    "offset_pix_x": 11.2,
+                    "offset_pix_y": 10.4,
+                    "gaze_x": 651.2,
+                    "gaze_y": 522.4
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.12,
+                    "offset_pix_x": 6.7,
+                    "offset_pix_y": -2.9,
+                    "gaze_x": 646.7,
+                    "gaze_y": 509.1
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 0.15,
+                    "offset_pix_x": -1.2,
+                    "offset_pix_y": -8.9,
+                    "gaze_x": 638.8,
+                    "gaze_y": 78.1
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.28,
+                    "offset_pix_x": 2.0,
+                    "offset_pix_y": -16.2,
+                    "gaze_x": 642.0,
+                    "gaze_y": 70.8
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.32,
+                    "offset_pix_x": -7.9,
+                    "offset_pix_y": -17.0,
+                    "gaze_x": 632.1,
+                    "gaze_y": 919.0
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.28,
+                    "offset_pix_x": -1.5,
+                    "offset_pix_y": 16.3,
+                    "gaze_x": 638.5,
+                    "gaze_y": 952.3
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 0.14,
+                    "offset_pix_x": -2.5,
+                    "offset_pix_y": -7.7,
+                    "gaze_x": 74.5,
+                    "gaze_y": 504.3
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.2,
+                    "offset_pix_x": 10.9,
+                    "offset_pix_y": 4.2,
+                    "gaze_x": 87.9,
+                    "gaze_y": 516.2
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.13,
+                    "offset_pix_x": -7.2,
+                    "offset_pix_y": -1.7,
+                    "gaze_x": 1194.8,
+                    "gaze_y": 510.3
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.07,
+                    "offset_pix_x": -4.1,
+                    "offset_pix_y": 1.3,
+                    "gaze_x": 1197.9,
+                    "gaze_y": 513.3
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 0.31,
+                    "offset_pix_x": -7.0,
+                    "offset_pix_y": 16.9,
+                    "gaze_x": 137.0,
+                    "gaze_y": 154.9
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": -13.7,
+                    "offset_pix_y": -9.9,
+                    "gaze_x": 130.3,
+                    "gaze_y": 128.1
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 0.12,
+                    "offset_pix_x": 4.5,
+                    "offset_pix_y": -5.7,
+                    "gaze_x": 1139.5,
+                    "gaze_y": 132.3
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.76,
+                    "offset_pix_x": -26.1,
+                    "offset_pix_y": 36.1,
+                    "gaze_x": 1108.9,
+                    "gaze_y": 174.1
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 0.07,
+                    "offset_pix_x": -3.8,
+                    "offset_pix_y": 1.9,
+                    "gaze_x": 140.2,
+                    "gaze_y": 886.9
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.2,
+                    "offset_pix_x": -11.6,
+                    "offset_pix_y": 0.4,
+                    "gaze_x": 132.4,
+                    "gaze_y": 885.4
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.21,
+                    "offset_pix_x": -10.7,
+                    "offset_pix_y": 6.2,
+                    "gaze_x": 1124.3,
+                    "gaze_y": 891.2
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.11,
+                    "offset_pix_x": 1.3,
+                    "offset_pix_y": 6.1,
+                    "gaze_x": 1136.3,
+                    "gaze_y": 891.1
+                }
+            ]
+        },
+        {
+            "timestamp": 1001577,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "GOOD",
+                "error_avg_deg": 0.39,
+                "error_max_deg": 0.78,
+                "offset_deg": 0.36,
+                "offset_pix_x": 15.8,
+                "offset_pix_y": 13.8,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "GOOD",
+                "error_avg_deg": 0.31,
+                "error_max_deg": 1.31,
+                "offset_deg": 0.18,
+                "offset_pix_x": 4.8,
+                "offset_pix_y": 9.1,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 0.37,
+                    "offset_pix_x": 19.6,
+                    "offset_pix_y": 8.5,
+                    "gaze_x": 659.6,
+                    "gaze_y": 520.5
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": 16.2,
+                    "offset_pix_y": 3.5,
+                    "gaze_x": 656.2,
+                    "gaze_y": 515.5
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 0.51,
+                    "offset_pix_x": 13.3,
+                    "offset_pix_y": 26.9,
+                    "gaze_x": 653.3,
+                    "gaze_y": 113.9
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.12,
+                    "offset_pix_x": 4.0,
+                    "offset_pix_y": 5.9,
+                    "gaze_x": 644.0,
+                    "gaze_y": 92.9
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 0.31,
+                    "offset_pix_x": 14.8,
+                    "offset_pix_y": 10.5,
+                    "gaze_x": 654.8,
+                    "gaze_y": 946.5
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.09,
+                    "offset_pix_x": -1.2,
+                    "offset_pix_y": 5.3,
+                    "gaze_x": 638.8,
+                    "gaze_y": 941.3
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 0.36,
+                    "offset_pix_x": 19.0,
+                    "offset_pix_y": 8.2,
+                    "gaze_x": 96.0,
+                    "gaze_y": 520.2
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.27,
+                    "offset_pix_x": 13.2,
+                    "offset_pix_y": 8.6,
+                    "gaze_x": 90.2,
+                    "gaze_y": 520.6
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 0.29,
+                    "offset_pix_x": 11.9,
+                    "offset_pix_y": 12.4,
+                    "gaze_x": 1213.9,
+                    "gaze_y": 524.4
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.11,
+                    "offset_pix_x": -3.4,
+                    "offset_pix_y": 5.4,
+                    "gaze_x": 1198.6,
+                    "gaze_y": 517.4
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 0.78,
+                    "offset_pix_x": 8.2,
+                    "offset_pix_y": 44.6,
+                    "gaze_x": 152.2,
+                    "gaze_y": 182.6
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.2,
+                    "offset_pix_x": -10.1,
+                    "offset_pix_y": 5.9,
+                    "gaze_x": 133.9,
+                    "gaze_y": 143.9
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 0.37,
+                    "offset_pix_x": 6.8,
+                    "offset_pix_y": 20.3,
+                    "gaze_x": 1141.8,
+                    "gaze_y": 158.3
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.31,
+                    "offset_pix_x": -44.9,
+                    "offset_pix_y": 61.8,
+                    "gaze_x": 1090.1,
+                    "gaze_y": 199.8
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 0.59,
+                    "offset_pix_x": 21.5,
+                    "offset_pix_y": 27.2,
+                    "gaze_x": 165.5,
+                    "gaze_y": 912.2
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.24,
+                    "offset_pix_x": 3.1,
+                    "offset_pix_y": 14.0,
+                    "gaze_x": 147.1,
+                    "gaze_y": 899.0
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 0.26,
+                    "offset_pix_x": -1.5,
+                    "offset_pix_y": 14.9,
+                    "gaze_x": 1133.5,
+                    "gaze_y": 899.9
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.13,
+                    "offset_pix_x": -2.2,
+                    "offset_pix_y": -7.2,
+                    "gaze_x": 1132.8,
+                    "gaze_y": 877.8
+                }
+            ]
+        },
+        {
+            "timestamp": 1043703,
+            "validation_type": "HV9",
+            "tracking_mode": "LR",
+            "targets": {
+                "calibration_type": "HV9",
+                "targets": [
+                    [
+                        640.0,
+                        512.0
+                    ],
+                    [
+                        640.0,
+                        87.0
+                    ],
+                    [
+                        640.0,
+                        936.0
+                    ],
+                    [
+                        77.0,
+                        512.0
+                    ],
+                    [
+                        1202.0,
+                        512.0
+                    ],
+                    [
+                        144.0,
+                        138.0
+                    ],
+                    [
+                        1135.0,
+                        138.0
+                    ],
+                    [
+                        144.0,
+                        885.0
+                    ],
+                    [
+                        1135.0,
+                        885.0
+                    ]
+                ]
+            },
+            "summary_left": {
+                "eye": "LEFT",
+                "result": "POOR",
+                "error_avg_deg": 3.72,
+                "error_max_deg": 4.25,
+                "offset_deg": 3.7,
+                "offset_pix_x": -51.2,
+                "offset_pix_y": -209.6,
+                "ppd": null
+            },
+            "summary_right": {
+                "eye": "RIGHT",
+                "result": "POOR",
+                "error_avg_deg": 1.5,
+                "error_max_deg": 2.08,
+                "offset_deg": 1.44,
+                "offset_pix_x": 71.7,
+                "offset_pix_y": 43.5,
+                "ppd": null
+            },
+            "points": [
+                {
+                    "point_number": 0,
+                    "eye": "LEFT",
+                    "offset_deg": 3.92,
+                    "offset_pix_x": -44.4,
+                    "offset_pix_y": -224.1,
+                    "gaze_x": 595.6,
+                    "gaze_y": 287.9
+                },
+                {
+                    "point_number": 0,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.59,
+                    "offset_pix_x": 85.1,
+                    "offset_pix_y": 36.5,
+                    "gaze_x": 725.1,
+                    "gaze_y": 548.5
+                },
+                {
+                    "point_number": 1,
+                    "eye": "LEFT",
+                    "offset_deg": 3.41,
+                    "offset_pix_x": -61.4,
+                    "offset_pix_y": -189.2,
+                    "gaze_x": 578.6,
+                    "gaze_y": -102.19999999999999
+                },
+                {
+                    "point_number": 1,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.64,
+                    "offset_pix_x": 63.0,
+                    "offset_pix_y": 71.7,
+                    "gaze_x": 703.0,
+                    "gaze_y": 158.7
+                },
+                {
+                    "point_number": 2,
+                    "eye": "LEFT",
+                    "offset_deg": 3.32,
+                    "offset_pix_x": -48.0,
+                    "offset_pix_y": -187.6,
+                    "gaze_x": 592.0,
+                    "gaze_y": 748.4
+                },
+                {
+                    "point_number": 2,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.99,
+                    "offset_pix_x": 50.6,
+                    "offset_pix_y": 26.9,
+                    "gaze_x": 690.6,
+                    "gaze_y": 962.9
+                },
+                {
+                    "point_number": 3,
+                    "eye": "LEFT",
+                    "offset_deg": 3.67,
+                    "offset_pix_x": -39.5,
+                    "offset_pix_y": -210.2,
+                    "gaze_x": 37.5,
+                    "gaze_y": 301.8
+                },
+                {
+                    "point_number": 3,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.75,
+                    "offset_pix_x": 88.3,
+                    "offset_pix_y": 50.6,
+                    "gaze_x": 165.3,
+                    "gaze_y": 562.6
+                },
+                {
+                    "point_number": 4,
+                    "eye": "LEFT",
+                    "offset_deg": 3.48,
+                    "offset_pix_x": -89.6,
+                    "offset_pix_y": -181.9,
+                    "gaze_x": 1112.4,
+                    "gaze_y": 330.1
+                },
+                {
+                    "point_number": 4,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.87,
+                    "offset_pix_x": 49.8,
+                    "offset_pix_y": 8.0,
+                    "gaze_x": 1251.8,
+                    "gaze_y": 520.0
+                },
+                {
+                    "point_number": 5,
+                    "eye": "LEFT",
+                    "offset_deg": 2.33,
+                    "offset_pix_x": -37.7,
+                    "offset_pix_y": -130.4,
+                    "gaze_x": 106.3,
+                    "gaze_y": 7.599999999999994
+                },
+                {
+                    "point_number": 5,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.51,
+                    "offset_pix_x": 63.1,
+                    "offset_pix_y": 61.2,
+                    "gaze_x": 207.1,
+                    "gaze_y": 199.2
+                },
+                {
+                    "point_number": 6,
+                    "eye": "LEFT",
+                    "offset_deg": 3.68,
+                    "offset_pix_x": -93.6,
+                    "offset_pix_y": -192.7,
+                    "gaze_x": 1041.4,
+                    "gaze_y": -54.69999999999999
+                },
+                {
+                    "point_number": 6,
+                    "eye": "RIGHT",
+                    "offset_deg": 2.08,
+                    "offset_pix_x": 7.6,
+                    "offset_pix_y": 121.1,
+                    "gaze_x": 1142.6,
+                    "gaze_y": 259.1
+                },
+                {
+                    "point_number": 7,
+                    "eye": "LEFT",
+                    "offset_deg": 4.25,
+                    "offset_pix_x": -23.2,
+                    "offset_pix_y": -246.7,
+                    "gaze_x": 120.8,
+                    "gaze_y": 638.3
+                },
+                {
+                    "point_number": 7,
+                    "eye": "RIGHT",
+                    "offset_deg": 1.84,
+                    "offset_pix_x": 86.7,
+                    "offset_pix_y": 62.4,
+                    "gaze_x": 230.7,
+                    "gaze_y": 947.4
+                },
+                {
+                    "point_number": 8,
+                    "eye": "LEFT",
+                    "offset_deg": 3.72,
+                    "offset_pix_x": -91.0,
+                    "offset_pix_y": -196.6,
+                    "gaze_x": 1044.0,
+                    "gaze_y": 688.4
+                },
+                {
+                    "point_number": 8,
+                    "eye": "RIGHT",
+                    "offset_deg": 0.66,
+                    "offset_pix_x": 25.2,
+                    "offset_pix_y": 28.7,
+                    "gaze_x": 1160.2,
+                    "gaze_y": 913.7
+                }
+            ]
+        }
+    ],
+    "recordings": [
+        {
+            "start_time": 694745,
+            "end_time": 729894
+        },
+        {
+            "start_time": 737591,
+            "end_time": 772704
+        },
+        {
+            "start_time": 907857,
+            "end_time": 942976
+        },
+        {
+            "start_time": 946773,
+            "end_time": 981884
+        }
+    ],
+    "display_coords": {
+        "left": 0,
+        "top": 0,
+        "right": 1279,
+        "bottom": 1023
+    }
+}

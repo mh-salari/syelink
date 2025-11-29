@@ -1,0 +1,35 @@
+30507.453	DISPLAY_SCREEN	LOADING RESOURCE SURFACE FROM DISK
+30507.562	DISPLAY_SCREEN	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+33297.765	Calibration_Dark	do tracker setup
+494597.663	instruction_page	LOADING RESOURCE SURFACE FROM DISK
+494597.769	instruction_page	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+494601.16	instruction_page	flip time is later than desired time. Desired Time=494598 Flip Time=494615 Retrace Rate=16.662, prepareTime=27 flip request time 494600
+526857.289	calibration_in_dark.bright.target	LOADING RESOURCE SURFACE FROM DISK
+526857.353	calibration_in_dark.bright.target	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+531951.167	calibration_in_dark.rest_page	LOADING RESOURCE SURFACE FROM DISK
+531951.271	calibration_in_dark.rest_page	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+531957.204	calibration_in_dark.rest_page	flip time is later than desired time. Desired Time=531950 Flip Time=531973 Retrace Rate=16.662, prepareTime=29 flip request time 531955
+569674.114	calibration_in_dark.dark.target	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+574765.32	validation	LOADING RESOURCE SURFACE FROM DISK
+574765.423	validation	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+574769.57	validation	flip time is later than desired time. Desired Time=574761 Flip Time=574785 Retrace Rate=16.662, prepareTime=33 flip request time 574769
+578296.707	Validation_Dark	do tracker setup
+643424.531	DISPLAY_SCREEN[1]	LOADING RESOURCE SURFACE FROM DISK
+643424.644	DISPLAY_SCREEN[1]	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+647077.685	Validation_and_Calibration_Bright	do tracker setup
+706833.362	instruction_page[1]	LOADING RESOURCE SURFACE FROM DISK
+706833.487	instruction_page[1]	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+739951.405	calibration_in_bright.bright.target	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+745044.754	calibration_in_bright.rest_page	LOADING RESOURCE SURFACE FROM DISK
+745044.854	calibration_in_bright.rest_page	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+745049.728	calibration_in_bright.rest_page	flip time is later than desired time. Desired Time=745042 Flip Time=745066 Retrace Rate=16.662, prepareTime=31 flip request time 745048
+778869.805	calibration_in_bright.dark[1].target	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+783954.994	end_page[2]	LOADING RESOURCE SURFACE FROM DISK
+783955.1	end_page[2]	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+783959.364	end_page[2]	flip time is later than desired time. Desired Time=783951 Flip Time=783975 Retrace Rate=16.662, prepareTime=32 flip request time 783959
+786569.54	Validation_Bright	do tracker setup
+817858.653	end_page[1]	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+828996.26	Validation_Dark2	do tracker setup
+860018.136	end_page	LOADING RESOURCE SURFACE FROM DISK
+860018.252	end_page	LOADING RESOURCE SURFACE FROM SOFTWARE MEMORY
+860644.189	Sequencer	Closing starts
