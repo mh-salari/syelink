@@ -94,7 +94,7 @@ session = SessionData.load_json("data.json")
 # Access validation errors
 for val in session.validations:
     if val.summary_left:
-        print(f"Left eye avg error: {val.summary_left.error_avg_deg:.2f}°")
+        print(f"Left eye avg error: {val.summary_left.error_avg_deg:.2f}Â°")
 ```
 
 ## Data Structure
