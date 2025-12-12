@@ -141,6 +141,47 @@ def cmd_info(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_export_text(args: argparse.Namespace) -> int:
+    """Export ASC file data to text files."""
+    asc_path = Path(args.asc_file)
+    if not asc_path.exists():
+        print(f"Error: File not found: {asc_path}", file=sys.stderr)
+        return 1
+
+    print(f"Parsing {asc_path}...")
+    session = parse_asc_file(asc_path)
+
+    # Determine output directory
+    output_dir = Path(args.output) if args.output else asc_path.parent
+
+    if not output_dir.exists():
+        print(f"Error: Output directory not found: {output_dir}", file=sys.stderr)
+        return 1
+
+    print("Exporting to text files...")
+
+    # Save recordings
+    rec_file = session.save_recordings_text(output_dir)
+    print(f"  ✓ {rec_file.name}")
+
+    # Save calibrations
+    cal_file = session.save_calibrations_text(output_dir)
+    print(f"  ✓ {cal_file.name}")
+
+    # Save validations
+    val_file = session.save_validations_text(output_dir)
+    print(f"  ✓ {val_file.name}")
+
+    # Save metadata
+    metadata_file = output_dir / "metadata.txt"
+    session.save_metadata(metadata_file)
+    print(f"  ✓ {metadata_file.name}")
+
+    print(f"\nAll files saved to: {output_dir}")
+
+    return 0
+
+
 def main() -> int:
     """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(
@@ -161,6 +202,12 @@ def main() -> int:
     info_parser = subparsers.add_parser("info", help="Show session information")
     info_parser.add_argument("json_file", help="Path to the JSON session file")
     info_parser.set_defaults(func=cmd_info)
+
+    # Export text command
+    export_parser = subparsers.add_parser("export-text", help="Export ASC file to text files")
+    export_parser.add_argument("asc_file", help="Path to the ASC file")
+    export_parser.add_argument("-o", "--output", help="Output directory (default: same as ASC file)")
+    export_parser.set_defaults(func=cmd_export_text)
 
     # Plot validation command
     plot_val_parser = subparsers.add_parser("plot-validation", help="Plot validation data")
