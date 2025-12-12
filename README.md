@@ -52,12 +52,21 @@ uv run syelink plot-validation data.json -i 0 -o validation.png
 uv run syelink plot-calibration data.json -i 0 -o calibration.png
 ```
 
+### Export to text files
+
+```bash
+uv run syelink export-text data.asc
+```
+
+This creates human-readable text files: `recordings.txt`, `calibrations.txt`, `validations.txt`, and `metadata.txt`.
+
 ## CLI Commands
 
 | Command | Description |
 |---------|-------------|
 | `syelink parse <asc_file>` | Parse ASC file to JSON |
 | `syelink info <json_file>` | Show session information |
+| `syelink export-text <asc_file>` | Export ASC file to text files |
 | `syelink plot-validation <json_file>` | Plot validation data |
 | `syelink plot-calibration <json_file>` | Plot calibration data |
 
@@ -65,6 +74,9 @@ uv run syelink plot-calibration data.json -i 0 -o calibration.png
 
 **parse**
 - `-o, --output` - Output JSON file path (default: same name as ASC file)
+
+**export-text**
+- `-o, --output` - Output directory (default: same directory as ASC file)
 
 **plot-validation / plot-calibration**
 - `-i, --index` - Calibration/validation index (default: 0)
