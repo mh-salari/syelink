@@ -160,20 +160,23 @@ def cmd_export_text(args: argparse.Namespace) -> int:
 
     print("Exporting to text files...")
 
+    # Use ASC filename (without extension) as prefix for output files
+    filename_prefix = asc_path.stem
+
     # Save recordings
-    rec_file = session.save_recordings_text(output_dir)
+    rec_file = session.save_recordings_text(output_dir, filename_prefix)
     print(f"  ✓ {rec_file.name}")
 
     # Save calibrations
-    cal_file = session.save_calibrations_text(output_dir)
+    cal_file = session.save_calibrations_text(output_dir, filename_prefix)
     print(f"  ✓ {cal_file.name}")
 
     # Save validations
-    val_file = session.save_validations_text(output_dir)
+    val_file = session.save_validations_text(output_dir, filename_prefix)
     print(f"  ✓ {val_file.name}")
 
     # Save metadata
-    metadata_file = output_dir / "metadata.txt"
+    metadata_file = output_dir / f"{filename_prefix}_metadata.txt"
     session.save_metadata(metadata_file)
     print(f"  ✓ {metadata_file.name}")
 

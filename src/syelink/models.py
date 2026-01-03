@@ -536,11 +536,14 @@ class SessionData:
                 duration = (rec.end_time - rec.start_time) if rec.end_time else "N/A"
                 f.write(f"[{i + 1}] Recording: {rec.start_time}ms - {end}ms (Duration: {duration}ms)\n")
 
-    def save_recordings_text(self, output_dir: str | Path) -> Path:
+    def save_recordings_text(self, output_dir: str | Path, filename_prefix: str = "") -> Path:
         """Save all recording blocks to a single text file with headers.
 
         Args:
             output_dir: Directory to save the text file in.
+            filename_prefix: Optional prefix for the filename (e.g., "subject01").
+                           If provided, output will be "{prefix}_recordings.txt".
+                           If empty, output will be "recordings.txt".
 
         Returns:
             Path to the saved file.
@@ -548,7 +551,11 @@ class SessionData:
         """
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
-        filepath = output_dir / "recordings.txt"
+
+        if filename_prefix:
+            filepath = output_dir / f"{filename_prefix}_recordings.txt"
+        else:
+            filepath = output_dir / "recordings.txt"
 
         with filepath.open("w", encoding="utf-8") as f:
             for i, rec in enumerate(self.recordings):
@@ -560,11 +567,14 @@ class SessionData:
                     f.write("\n\n")
         return filepath
 
-    def save_calibrations_text(self, output_dir: str | Path) -> Path:
+    def save_calibrations_text(self, output_dir: str | Path, filename_prefix: str = "") -> Path:
         """Save all calibration blocks to a single text file with headers.
 
         Args:
             output_dir: Directory to save the text file in.
+            filename_prefix: Optional prefix for the filename (e.g., "subject01").
+                           If provided, output will be "{prefix}_calibrations.txt".
+                           If empty, output will be "calibrations.txt".
 
         Returns:
             Path to the saved file.
@@ -572,7 +582,11 @@ class SessionData:
         """
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
-        filepath = output_dir / "calibrations.txt"
+
+        if filename_prefix:
+            filepath = output_dir / f"{filename_prefix}_calibrations.txt"
+        else:
+            filepath = output_dir / "calibrations.txt"
 
         with filepath.open("w", encoding="utf-8") as f:
             for i, cal in enumerate(self.calibrations):
@@ -584,11 +598,14 @@ class SessionData:
                     f.write("\n\n")
         return filepath
 
-    def save_validations_text(self, output_dir: str | Path) -> Path:
+    def save_validations_text(self, output_dir: str | Path, filename_prefix: str = "") -> Path:
         """Save all validation blocks to a single text file with headers.
 
         Args:
             output_dir: Directory to save the text file in.
+            filename_prefix: Optional prefix for the filename (e.g., "subject01").
+                           If provided, output will be "{prefix}_validations.txt".
+                           If empty, output will be "validations.txt".
 
         Returns:
             Path to the saved file.
@@ -596,7 +613,11 @@ class SessionData:
         """
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
-        filepath = output_dir / "validations.txt"
+
+        if filename_prefix:
+            filepath = output_dir / f"{filename_prefix}_validations.txt"
+        else:
+            filepath = output_dir / "validations.txt"
 
         with filepath.open("w", encoding="utf-8") as f:
             for i, val in enumerate(self.validations):
