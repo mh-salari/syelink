@@ -16,6 +16,29 @@ from syelink.models import SessionData
 from syelink.plotting import plot_calibration_raw, plot_validation
 
 
+def load_session_data(file_path: Path) -> SessionData:
+    """Load session data from either ASC or JSON file.
+
+    Args:
+        file_path: Path to ASC or JSON file
+
+    Returns:
+        SessionData object
+
+    Raises:
+        ValueError: If file format is not supported
+
+    """
+    suffix = file_path.suffix.lower()
+
+    if suffix == ".asc":
+        return parse_asc_file(file_path)
+    if suffix == ".json":
+        return SessionData.load_json(str(file_path))
+    msg = f"Unsupported file format: {file_path.name}\nExpected ASC or JSON file, got {suffix or 'no extension'}."
+    raise ValueError(msg)
+
+
 def cmd_convert(args: argparse.Namespace) -> int:
     """Convert ASC file to JSON and/or text files."""
     asc_path = Path(args.asc_file)
@@ -74,23 +97,40 @@ def cmd_convert(args: argparse.Namespace) -> int:
 
 
 def cmd_plot_validation(args: argparse.Namespace) -> int:
-    """Plot validation data from JSON file."""
-    json_path = Path(args.json_file)
-    if not json_path.exists():
-        print(f"Error: File not found: {json_path}", file=sys.stderr)
+    """Plot validation data from ASC or JSON file."""
+    file_path = Path(args.data_file)
+    if not file_path.exists():
+        print(f"Error: File not found: {file_path}", file=sys.stderr)
         return 1
 
-    session = SessionData.load_json(str(json_path))
+    try:
+        session = load_session_data(file_path)
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
 
-    if args.index >= len(session.validations):
+    num_validations = len(session.validations)
+    if num_validations == 0:
+        print("Error: No validations found in the file", file=sys.stderr)
+        return 1
+
+    if args.index >= num_validations:
         print(
-            f"Error: Validation index {args.index} out of range (0-{len(session.validations) - 1})",
+            f"Error: Validation index {args.index} out of range (0-{num_validations - 1})",
             file=sys.stderr,
         )
         return 1
 
-    # Determine output path
-    save_path = Path(args.output) if args.output else json_path.parent / f"validation_{args.index}.png"
+    print(f"Found {num_validations} validation(s) in {file_path.name}")
+    if num_validations > 1:
+        print(f"Plotting validation #{args.index} (use -i to select different validation)")
+
+    # Determine output path with consistent naming
+    if args.output:
+        save_path = Path(args.output)
+    else:
+        filename_prefix = file_path.stem
+        save_path = file_path.parent / f"{filename_prefix}_validation_{args.index}.png"
 
     plot_validation(
         session,
@@ -108,23 +148,40 @@ def cmd_plot_validation(args: argparse.Namespace) -> int:
 
 
 def cmd_plot_calibration(args: argparse.Namespace) -> int:
-    """Plot calibration data from JSON file."""
-    json_path = Path(args.json_file)
-    if not json_path.exists():
-        print(f"Error: File not found: {json_path}", file=sys.stderr)
+    """Plot calibration data from ASC or JSON file."""
+    file_path = Path(args.data_file)
+    if not file_path.exists():
+        print(f"Error: File not found: {file_path}", file=sys.stderr)
         return 1
 
-    session = SessionData.load_json(str(json_path))
+    try:
+        session = load_session_data(file_path)
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
 
-    if args.index >= len(session.calibrations):
+    num_calibrations = len(session.calibrations)
+    if num_calibrations == 0:
+        print("Error: No calibrations found in the file", file=sys.stderr)
+        return 1
+
+    if args.index >= num_calibrations:
         print(
-            f"Error: Calibration index {args.index} out of range (0-{len(session.calibrations) - 1})",
+            f"Error: Calibration index {args.index} out of range (0-{num_calibrations - 1})",
             file=sys.stderr,
         )
         return 1
 
-    # Determine output path
-    save_path = Path(args.output) if args.output else json_path.parent / f"calibration_{args.index}.png"
+    print(f"Found {num_calibrations} calibration(s) in {file_path.name}")
+    if num_calibrations > 1:
+        print(f"Plotting calibration #{args.index} (use -i to select different calibration)")
+
+    # Determine output path with consistent naming
+    if args.output:
+        save_path = Path(args.output)
+    else:
+        filename_prefix = file_path.stem
+        save_path = file_path.parent / f"{filename_prefix}_calibration_{args.index}.png"
 
     plot_calibration_raw(
         session,
@@ -141,15 +198,19 @@ def cmd_plot_calibration(args: argparse.Namespace) -> int:
 
 
 def cmd_info(args: argparse.Namespace) -> int:
-    """Show information about a JSON session file."""
-    json_path = Path(args.json_file)
-    if not json_path.exists():
-        print(f"Error: File not found: {json_path}", file=sys.stderr)
+    """Show information about an ASC or JSON session file."""
+    file_path = Path(args.data_file)
+    if not file_path.exists():
+        print(f"Error: File not found: {file_path}", file=sys.stderr)
         return 1
 
-    session = SessionData.load_json(str(json_path))
+    try:
+        session = load_session_data(file_path)
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
 
-    print(f"Session: {json_path.name}")
+    print(f"Session: {file_path.name}")
     print("=" * 60)
 
     if session.display_coords:
@@ -193,12 +254,12 @@ def main() -> int:
 
     # Info command
     info_parser = subparsers.add_parser("info", help="Show session information")
-    info_parser.add_argument("json_file", help="Path to the JSON session file")
+    info_parser.add_argument("data_file", help="Path to the ASC or JSON file")
     info_parser.set_defaults(func=cmd_info)
 
     # Plot validation command
     plot_val_parser = subparsers.add_parser("plot-validation", help="Plot validation data")
-    plot_val_parser.add_argument("json_file", help="Path to the JSON session file")
+    plot_val_parser.add_argument("data_file", help="Path to the ASC or JSON file")
     plot_val_parser.add_argument("-i", "--index", type=int, default=0, help="Validation index (default: 0)")
     plot_val_parser.add_argument("-o", "--output", help="Output image path")
     plot_val_parser.add_argument("--target-image", help="Path to custom target image")
@@ -207,7 +268,7 @@ def main() -> int:
 
     # Plot calibration command
     plot_cal_parser = subparsers.add_parser("plot-calibration", help="Plot calibration data")
-    plot_cal_parser.add_argument("json_file", help="Path to the JSON session file")
+    plot_cal_parser.add_argument("data_file", help="Path to the ASC or JSON file")
     plot_cal_parser.add_argument("-i", "--index", type=int, default=0, help="Calibration index (default: 0)")
     plot_cal_parser.add_argument("-o", "--output", help="Output image path")
     plot_cal_parser.add_argument("--show", action="store_true", help="Show plot interactively")
