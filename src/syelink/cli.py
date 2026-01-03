@@ -30,7 +30,12 @@ def cmd_convert(args: argparse.Namespace) -> int:
         export_text = True
 
     print(f"Parsing {asc_path}...")
-    session = parse_asc_file(asc_path)
+
+    try:
+        session = parse_asc_file(asc_path)
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
 
     output_dir = Path(args.output) if args.output else asc_path.parent
     filename_prefix = asc_path.stem

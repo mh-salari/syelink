@@ -408,6 +408,9 @@ def parse_asc_file(asc_path: str | Path) -> SessionData:
     Returns:
         SessionData object containing all parsed data
 
+    Raises:
+        ValueError: If the file is not an ASC file or is a binary file
+
     Example:
         >>> session = parse_asc_file("data/recording.asc")
         >>> print(f"Found {len(session.calibrations)} calibrations")
@@ -415,6 +418,26 @@ def parse_asc_file(asc_path: str | Path) -> SessionData:
 
     """
     asc_path = Path(asc_path)
+
+    if asc_path.suffix.lower() != ".asc":
+        msg = (
+            f"Invalid file format: {asc_path.name}\n"
+            f"Expected an ASC file (text format), got {asc_path.suffix or 'no extension'}.\n"
+        )
+        if asc_path.suffix.lower() == ".edf":
+            msg += "EDF files are binary format. Convert to ASC using EyeLink's edf2asc tool first."
+        raise ValueError(msg)
+
+    try:
+        with asc_path.open(encoding="utf-8") as f:
+            f.read(1024)
+    except UnicodeDecodeError as e:
+        msg = (
+            f"Cannot read file as text: {asc_path.name}\n"
+            f"File appears to be binary, not an ASC text file.\n"
+            f"If this is an EDF file, convert it to ASC using EyeLink's edf2asc tool first."
+        )
+        raise ValueError(msg) from e
 
     # Parse display coordinates from header
     display_coords = parse_display_coords(asc_path)
