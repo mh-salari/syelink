@@ -16,27 +16,54 @@ from syelink.models import SessionData
 from syelink.plotting import plot_calibration_raw, plot_validation
 
 
-def cmd_parse(args: argparse.Namespace) -> int:
-    """Parse an ASC file and save as JSON."""
+def cmd_convert(args: argparse.Namespace) -> int:
+    """Convert ASC file to JSON and/or text files."""
     asc_path = Path(args.asc_file)
     if not asc_path.exists():
         print(f"Error: File not found: {asc_path}", file=sys.stderr)
         return 1
 
-    print(f"Parsing {asc_path}...")
+    export_json = args.json
+    export_text = args.text
+    if not export_json and not export_text:
+        export_json = True
+        export_text = True
 
+    print(f"Parsing {asc_path}...")
     session = parse_asc_file(asc_path)
 
-    # Determine output path
-    output_path = Path(args.output) if args.output else asc_path.with_suffix(".json")
+    output_dir = Path(args.output) if args.output else asc_path.parent
+    filename_prefix = asc_path.stem
 
-    session.save_json(str(output_path))
+    if export_json:
+        json_path = output_dir / f"{filename_prefix}.json"
+        session.save_json(str(json_path))
+        print(f"  ✓ {json_path.name}")
 
-    print(f"Saved to {output_path}")
+    if export_text:
+        if not output_dir.exists():
+            print(f"Error: Output directory not found: {output_dir}", file=sys.stderr)
+            return 1
+
+        rec_file = session.save_recordings_text(output_dir, filename_prefix)
+        print(f"  ✓ {rec_file.name}")
+
+        cal_file = session.save_calibrations_text(output_dir, filename_prefix)
+        print(f"  ✓ {cal_file.name}")
+
+        val_file = session.save_validations_text(output_dir, filename_prefix)
+        print(f"  ✓ {val_file.name}")
+
+        metadata_file = output_dir / f"{filename_prefix}_metadata.txt"
+        session.save_metadata(metadata_file)
+        print(f"  ✓ {metadata_file.name}")
+
+    print("\nSession summary:")
     print(f"  - {len(session.calibrations)} calibrations")
     print(f"  - {len(session.validations)} validations")
     if session.display_coords:
         print(f"  - Display: {session.display_coords.width}x{session.display_coords.height}")
+    print(f"\nAll files saved to: {output_dir}")
 
     return 0
 
@@ -141,50 +168,6 @@ def cmd_info(args: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_export_text(args: argparse.Namespace) -> int:
-    """Export ASC file data to text files."""
-    asc_path = Path(args.asc_file)
-    if not asc_path.exists():
-        print(f"Error: File not found: {asc_path}", file=sys.stderr)
-        return 1
-
-    print(f"Parsing {asc_path}...")
-    session = parse_asc_file(asc_path)
-
-    # Determine output directory
-    output_dir = Path(args.output) if args.output else asc_path.parent
-
-    if not output_dir.exists():
-        print(f"Error: Output directory not found: {output_dir}", file=sys.stderr)
-        return 1
-
-    print("Exporting to text files...")
-
-    # Use ASC filename (without extension) as prefix for output files
-    filename_prefix = asc_path.stem
-
-    # Save recordings
-    rec_file = session.save_recordings_text(output_dir, filename_prefix)
-    print(f"  ✓ {rec_file.name}")
-
-    # Save calibrations
-    cal_file = session.save_calibrations_text(output_dir, filename_prefix)
-    print(f"  ✓ {cal_file.name}")
-
-    # Save validations
-    val_file = session.save_validations_text(output_dir, filename_prefix)
-    print(f"  ✓ {val_file.name}")
-
-    # Save metadata
-    metadata_file = output_dir / f"{filename_prefix}_metadata.txt"
-    session.save_metadata(metadata_file)
-    print(f"  ✓ {metadata_file.name}")
-
-    print(f"\nAll files saved to: {output_dir}")
-
-    return 0
-
-
 def main() -> int:
     """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(
@@ -195,22 +178,18 @@ def main() -> int:
 
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
-    # Parse command
-    parse_parser = subparsers.add_parser("parse", help="Parse ASC file to JSON")
-    parse_parser.add_argument("asc_file", help="Path to the ASC file")
-    parse_parser.add_argument("-o", "--output", help="Output JSON file path")
-    parse_parser.set_defaults(func=cmd_parse)
+    # Convert command
+    convert_parser = subparsers.add_parser("convert", help="Convert ASC file to JSON and/or text files")
+    convert_parser.add_argument("asc_file", help="Path to the ASC file")
+    convert_parser.add_argument("-o", "--output", help="Output directory (default: same as ASC file)")
+    convert_parser.add_argument("--json", action="store_true", help="Export JSON file")
+    convert_parser.add_argument("--text", action="store_true", help="Export text files")
+    convert_parser.set_defaults(func=cmd_convert)
 
     # Info command
     info_parser = subparsers.add_parser("info", help="Show session information")
     info_parser.add_argument("json_file", help="Path to the JSON session file")
     info_parser.set_defaults(func=cmd_info)
-
-    # Export text command
-    export_parser = subparsers.add_parser("export-text", help="Export ASC file to text files")
-    export_parser.add_argument("asc_file", help="Path to the ASC file")
-    export_parser.add_argument("-o", "--output", help="Output directory (default: same as ASC file)")
-    export_parser.set_defaults(func=cmd_export_text)
 
     # Plot validation command
     plot_val_parser = subparsers.add_parser("plot-validation", help="Plot validation data")
