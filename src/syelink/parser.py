@@ -69,12 +69,18 @@ def find_all_segments(asc_file: str | Path) -> tuple[list[dict[str, Any]], list[
                 current_cal_block = None
                 continue
 
-            # If we're in a calibration block, collect all lines
+            # If we're in a calibration block, collect MSG lines and continuation lines (not gaze samples)
             if current_cal_block is not None:
-                current_cal_block["lines"].append(line)
-                time_match = re.match(r"MSG\s+(\d+)", line)
-                if time_match and current_cal_block["timestamp"] is None:
-                    current_cal_block["timestamp"] = int(time_match.group(1))
+                # Skip gaze sample data (lines starting with a digit timestamp)
+                if line and line[0].isdigit():
+                    continue
+
+                # Collect MSG lines and their continuation lines (indented with whitespace)
+                if line.startswith("MSG") or (line and line[0].isspace()):
+                    current_cal_block["lines"].append(line)
+                    time_match = re.match(r"MSG\s+(\d+)", line)
+                    if time_match and current_cal_block["timestamp"] is None:
+                        current_cal_block["timestamp"] = int(time_match.group(1))
                 continue
 
             # VALIDATION START
