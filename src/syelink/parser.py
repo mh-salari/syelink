@@ -86,11 +86,19 @@ def find_all_segments(asc_file: str | Path) -> tuple[list[dict[str, Any]], list[
                     current_val_block["lines"].append(line)
                 continue
 
-            # If we're in a validation block, collect all VALIDATE lines
-            if current_val_block is not None:
-                if line.startswith("MSG") and ("VALIDATE" in line or "!CAL VALIDATION" in line):
-                    current_val_block["lines"].append(line)
-                    continue
+            # Collect validation-related MSG lines
+            if (
+                current_val_block is not None
+                and line.startswith("MSG")
+                and ("VALIDATE" in line or "!CAL VALIDATION" in line)
+            ):
+                current_val_block["lines"].append(line)
+                continue
+
+            # Close validation block on meaningful boundaries (not gaze sample data)
+            if current_val_block is not None and (
+                line.startswith(("START", "INPUT")) or ">>>>>>> CALIBRATION" in line
+            ):
                 validations.append({
                     "timestamp": current_val_block["timestamp"],
                     "text": "".join(current_val_block["lines"]),
@@ -118,5 +126,12 @@ def find_all_segments(asc_file: str | Path) -> tuple[list[dict[str, Any]], list[
                         })
                         current_rec_block = None
                 continue
+
+    # Close any unclosed validation block at end of file
+    if current_val_block is not None:
+        validations.append({
+            "timestamp": current_val_block["timestamp"],
+            "text": "".join(current_val_block["lines"]),
+        })
 
     return calibrations, validations, recordings
