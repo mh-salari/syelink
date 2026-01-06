@@ -7,7 +7,6 @@ Parse and visualize EyeLink eye tracker data from ASC files.
 - Parse EyeLink ASC files into structured JSON
 - Extract calibration, validation, and recording data
 - Visualize calibration and validation results
-- Preserve all numerical precision through JSON serialization
 - Command-line interface for common tasks
 
 ## Installation

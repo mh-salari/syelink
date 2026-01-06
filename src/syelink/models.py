@@ -5,6 +5,7 @@ These structures define what fields will be extracted from the raw ASC text.
 
 from __future__ import annotations
 
+import csv
 import json
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -456,6 +457,96 @@ class RecordingData:
         )
 
 
+# GAZE SAMPLE AND RAW PUPIL/CR DATA
+
+
+@dataclass
+class RawPupilData:
+    """Raw pupil and corneal reflection data from eye tracker camera.
+
+    This data is only available when raw recording is enabled (record_raw_data=True in pyelink).
+    Data is recorded as MSG lines with format:
+    MSG <msg_ts> L <sample_ts> <px> <py> <pa> <width> <height> <crx> <cry> <crarea> <cr2x> <cr2y> <crarea2> R ...
+
+    Values of -32768.0 or 4294934528.0 indicate missing/invalid data.
+    """
+
+    pupil_x: float | None  # Raw pupil X coordinate in camera sensor units
+    pupil_y: float | None  # Raw pupil Y coordinate in camera sensor units
+    pupil_area: float | None  # Pupil area
+    pupil_width: float | None  # Pupil width in pixels
+    pupil_height: float | None  # Pupil height in pixels
+    cr_x: float | None  # Corneal reflection X coordinate
+    cr_y: float | None  # Corneal reflection Y coordinate
+    cr_area: float | None  # Corneal reflection area
+    cr2_x: float | None = None  # Secondary CR X
+    cr2_y: float | None = None  # Secondary CR Y
+    cr2_area: float | None = None  # Secondary CR area
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> RawPupilData:
+        """Create RawPupilData from a dictionary."""
+        return cls(**{k: v for k, v in data.items() if k in cls.__dataclass_fields__})
+
+
+@dataclass
+class GazeSample:
+    """Single gaze sample with optional raw pupil/CR data.
+
+    Gaze data is always present (from sample lines in ASC file).
+    Raw pupil/CR data is only present in RECORD mode when raw recording was enabled.
+    """
+
+    timestamp: int  # Sample timestamp in milliseconds
+    segment: int  # Segment number (1-based)
+    mode: Literal["RECORD", "CALIBRATE", "VALIDATE", "OFFLINE"]  # Recording mode
+    tracking_mode: str  # e.g., "CR", "P-CR", "LR"
+    sample_rate: int  # Sampling rate in Hz (e.g., 1000)
+    eyes_tracked: str  # "L", "R", or "LR"
+
+    # Gaze data (always present)
+    left_gaze_x: float | None
+    left_gaze_y: float | None
+    left_pupil: float | None
+    right_gaze_x: float | None
+    right_gaze_y: float | None
+    right_pupil: float | None
+    status: str  # Status flags (e.g., "...C.", ".C..R")
+
+    # Raw pupil/CR data (only in RECORD mode with raw recording)
+    left_raw: RawPupilData | None = None
+    right_raw: RawPupilData | None = None
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> GazeSample:
+        """Create GazeSample from a dictionary."""
+        # Handle nested RawPupilData
+        left_raw = None
+        right_raw = None
+        if "left_raw" in data and data["left_raw"] is not None:
+            left_raw = RawPupilData.from_dict(data["left_raw"])
+        if "right_raw" in data and data["right_raw"] is not None:
+            right_raw = RawPupilData.from_dict(data["right_raw"])
+
+        return cls(
+            timestamp=data["timestamp"],
+            segment=data["segment"],
+            mode=data["mode"],
+            tracking_mode=data["tracking_mode"],
+            sample_rate=data["sample_rate"],
+            eyes_tracked=data["eyes_tracked"],
+            left_gaze_x=data.get("left_gaze_x"),
+            left_gaze_y=data.get("left_gaze_y"),
+            left_pupil=data.get("left_pupil"),
+            right_gaze_x=data.get("right_gaze_x"),
+            right_gaze_y=data.get("right_gaze_y"),
+            right_pupil=data.get("right_pupil"),
+            status=data["status"],
+            left_raw=left_raw,
+            right_raw=right_raw,
+        )
+
+
 @dataclass
 class SessionData:
     """Container for all session data."""
@@ -463,6 +554,7 @@ class SessionData:
     calibrations: list[CalibrationData] = field(default_factory=list)
     validations: list[ValidationData] = field(default_factory=list)
     recordings: list[RecordingData] = field(default_factory=list)
+    gaze_samples: list[GazeSample] = field(default_factory=list)
     display_coords: DisplayCoords | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -627,6 +719,142 @@ class SessionData:
                     f.write("=" * 80 + "\n")
                     f.write(val.content)
                     f.write("\n\n")
+        return filepath
+
+    def save_samples_csv(self, filepath: str | Path) -> Path:
+        """Save gaze samples to CSV file.
+
+        CSV columns:
+        - timestamp: Sample timestamp (ms)
+        - segment: Segment number (1-based)
+        - mode: Recording mode (RECORD/CALIBRATE/VALIDATE/OFFLINE)
+        - tracking_mode: Tracking mode (e.g., CR, P-CR)
+        - sample_rate: Sampling rate in Hz
+        - eyes_tracked: Eyes tracked (L/R/LR)
+        - left_gaze_x, left_gaze_y, left_pupil: Left eye gaze data
+        - right_gaze_x, right_gaze_y, right_pupil: Right eye gaze data
+        - status: Status flags
+        - left_raw_*: Left eye raw pupil/CR data (11 columns, empty if not available)
+        - right_raw_*: Right eye raw pupil/CR data (11 columns, empty if not available)
+
+        Args:
+            filepath: Path to save CSV file
+
+        Returns:
+            Path to the saved file
+
+        """
+        filepath = Path(filepath)
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+
+        # Define CSV column headers
+        headers = [
+            "timestamp",
+            "segment",
+            "mode",
+            "tracking_mode",
+            "sample_rate",
+            "eyes_tracked",
+            "left_gaze_x",
+            "left_gaze_y",
+            "left_pupil",
+            "right_gaze_x",
+            "right_gaze_y",
+            "right_pupil",
+            "status",
+            "left_raw_px",
+            "left_raw_py",
+            "left_raw_pa",
+            "left_raw_width",
+            "left_raw_height",
+            "left_raw_crx",
+            "left_raw_cry",
+            "left_raw_crarea",
+            "left_raw_cr2x",
+            "left_raw_cr2y",
+            "left_raw_cr2area",
+            "right_raw_px",
+            "right_raw_py",
+            "right_raw_pa",
+            "right_raw_width",
+            "right_raw_height",
+            "right_raw_crx",
+            "right_raw_cry",
+            "right_raw_crarea",
+            "right_raw_cr2x",
+            "right_raw_cr2y",
+            "right_raw_cr2area",
+        ]
+
+        with filepath.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=headers)
+            writer.writeheader()
+
+            for sample in self.gaze_samples:
+                row = {
+                    "timestamp": sample.timestamp,
+                    "segment": sample.segment,
+                    "mode": sample.mode,
+                    "tracking_mode": sample.tracking_mode,
+                    "sample_rate": sample.sample_rate,
+                    "eyes_tracked": sample.eyes_tracked,
+                    "left_gaze_x": sample.left_gaze_x if sample.left_gaze_x is not None else "",
+                    "left_gaze_y": sample.left_gaze_y if sample.left_gaze_y is not None else "",
+                    "left_pupil": sample.left_pupil if sample.left_pupil is not None else "",
+                    "right_gaze_x": sample.right_gaze_x if sample.right_gaze_x is not None else "",
+                    "right_gaze_y": sample.right_gaze_y if sample.right_gaze_y is not None else "",
+                    "right_pupil": sample.right_pupil if sample.right_pupil is not None else "",
+                    "status": sample.status,
+                }
+
+                # Add left raw data (empty if not available)
+                if sample.left_raw:
+                    row.update({
+                        "left_raw_px": sample.left_raw.pupil_x if sample.left_raw.pupil_x is not None else "",
+                        "left_raw_py": sample.left_raw.pupil_y if sample.left_raw.pupil_y is not None else "",
+                        "left_raw_pa": sample.left_raw.pupil_area if sample.left_raw.pupil_area is not None else "",
+                        "left_raw_width": sample.left_raw.pupil_width
+                        if sample.left_raw.pupil_width is not None
+                        else "",
+                        "left_raw_height": sample.left_raw.pupil_height
+                        if sample.left_raw.pupil_height is not None
+                        else "",
+                        "left_raw_crx": sample.left_raw.cr_x if sample.left_raw.cr_x is not None else "",
+                        "left_raw_cry": sample.left_raw.cr_y if sample.left_raw.cr_y is not None else "",
+                        "left_raw_crarea": sample.left_raw.cr_area if sample.left_raw.cr_area is not None else "",
+                        "left_raw_cr2x": sample.left_raw.cr2_x if sample.left_raw.cr2_x is not None else "",
+                        "left_raw_cr2y": sample.left_raw.cr2_y if sample.left_raw.cr2_y is not None else "",
+                        "left_raw_cr2area": sample.left_raw.cr2_area if sample.left_raw.cr2_area is not None else "",
+                    })
+                else:
+                    row.update({key: "" for key in headers if key.startswith("left_raw_")})
+
+                # Add right raw data (empty if not available)
+                if sample.right_raw:
+                    row.update({
+                        "right_raw_px": sample.right_raw.pupil_x if sample.right_raw.pupil_x is not None else "",
+                        "right_raw_py": sample.right_raw.pupil_y if sample.right_raw.pupil_y is not None else "",
+                        "right_raw_pa": sample.right_raw.pupil_area if sample.right_raw.pupil_area is not None else "",
+                        "right_raw_width": sample.right_raw.pupil_width
+                        if sample.right_raw.pupil_width is not None
+                        else "",
+                        "right_raw_height": sample.right_raw.pupil_height
+                        if sample.right_raw.pupil_height is not None
+                        else "",
+                        "right_raw_crx": sample.right_raw.cr_x if sample.right_raw.cr_x is not None else "",
+                        "right_raw_cry": sample.right_raw.cr_y if sample.right_raw.cr_y is not None else "",
+                        "right_raw_crarea": sample.right_raw.cr_area if sample.right_raw.cr_area is not None else "",
+                        "right_raw_cr2x": sample.right_raw.cr2_x if sample.right_raw.cr2_x is not None else "",
+                        "right_raw_cr2y": sample.right_raw.cr2_y if sample.right_raw.cr2_y is not None else "",
+                        "right_raw_cr2area": sample.right_raw.cr2_area
+                        if sample.right_raw.cr2_area is not None
+                        else "",
+                    })
+                else:
+                    row.update({key: "" for key in headers if key.startswith("right_raw_")})
+
+                writer.writerow(row)
+
         return filepath
 
     @classmethod

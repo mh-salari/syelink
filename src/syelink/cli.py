@@ -48,9 +48,11 @@ def cmd_convert(args: argparse.Namespace) -> int:
 
     export_json = args.json
     export_text = args.text
-    if not export_json and not export_text:
+    export_samples = args.samples
+    if not export_json and not export_text and not export_samples:
         export_json = True
         export_text = True
+        export_samples = True
 
     print(f"Parsing {asc_path}...")
 
@@ -86,9 +88,18 @@ def cmd_convert(args: argparse.Namespace) -> int:
         session.save_metadata(metadata_file)
         print(f"  ✓ {metadata_file.name}")
 
+    if export_samples and session.gaze_samples:
+        csv_path = output_dir / f"{filename_prefix}_samples.csv"
+        session.save_samples_csv(str(csv_path))
+        samples_with_raw = sum(1 for s in session.gaze_samples if s.left_raw or s.right_raw)
+        print(f"  ✓ {csv_path.name} ({len(session.gaze_samples):,} samples, {samples_with_raw:,} with raw data)")
+
     print("\nSession summary:")
     print(f"  - {len(session.calibrations)} calibrations")
     print(f"  - {len(session.validations)} validations")
+    if session.gaze_samples:
+        samples_with_raw = sum(1 for s in session.gaze_samples if s.left_raw or s.right_raw)
+        print(f"  - {len(session.gaze_samples):,} gaze samples ({samples_with_raw:,} with raw pupil/CR data)")
     if session.display_coords:
         print(f"  - Display: {session.display_coords.width}x{session.display_coords.height}")
     print(f"\nAll files saved to: {output_dir}")
@@ -197,6 +208,53 @@ def cmd_plot_calibration(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_export_samples(args: argparse.Namespace) -> int:
+    """Export gaze samples to CSV file."""
+    file_path = Path(args.data_file)
+    if not file_path.exists():
+        print(f"Error: File not found: {file_path}", file=sys.stderr)
+        return 1
+
+    try:
+        session = load_session_data(file_path)
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+    if not session.gaze_samples:
+        print("Error: No gaze samples found in the file", file=sys.stderr)
+        return 1
+
+    # Determine output path
+    if args.output:
+        csv_path = Path(args.output)
+    else:
+        filename_prefix = file_path.stem
+        csv_path = file_path.parent / f"{filename_prefix}_samples.csv"
+
+    print(f"Exporting {len(session.gaze_samples):,} gaze samples to CSV...")
+
+    try:
+        session.save_samples_csv(str(csv_path))
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+    # Show statistics
+    samples_with_raw = sum(1 for s in session.gaze_samples if s.left_raw or s.right_raw)
+    print(f"  ✓ Total samples: {len(session.gaze_samples):,}")
+    print(
+        f"  ✓ Samples with raw pupil/CR data: {samples_with_raw:,} ({samples_with_raw / len(session.gaze_samples) * 100:.1f}%)"
+    )
+
+    # Show file size
+    size_mb = csv_path.stat().st_size / (1024 * 1024)
+    print(f"  ✓ File size: {size_mb:.2f} MB")
+    print(f"\nSaved to: {csv_path}")
+
+    return 0
+
+
 def cmd_info(args: argparse.Namespace) -> int:
     """Show information about an ASC or JSON session file."""
     file_path = Path(args.data_file)
@@ -231,6 +289,14 @@ def cmd_info(args: argparse.Namespace) -> int:
         right_err = f"{val.summary_right.error_avg_deg:.2f}°" if val.summary_right else "N/A"
         print(f"  [{i}] {val.validation_type} @ {val.timestamp}ms - L:{left_err} R:{right_err}")
 
+    print()
+    print(f"Gaze samples: {len(session.gaze_samples):,}")
+    if session.gaze_samples:
+        samples_with_raw = sum(1 for s in session.gaze_samples if s.left_raw or s.right_raw)
+        print(
+            f"  - With raw pupil/CR data: {samples_with_raw:,} ({samples_with_raw / len(session.gaze_samples) * 100:.1f}%)"
+        )
+
     return 0
 
 
@@ -245,12 +311,19 @@ def main() -> int:
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # Convert command
-    convert_parser = subparsers.add_parser("convert", help="Convert ASC file to JSON and/or text files")
+    convert_parser = subparsers.add_parser("convert", help="Convert ASC file to JSON, text files, and/or CSV samples")
     convert_parser.add_argument("asc_file", help="Path to the ASC file")
     convert_parser.add_argument("-o", "--output", help="Output directory (default: same as ASC file)")
-    convert_parser.add_argument("--json", action="store_true", help="Export JSON file")
-    convert_parser.add_argument("--text", action="store_true", help="Export text files")
+    convert_parser.add_argument("--json", action="store_true", help="Export JSON file only")
+    convert_parser.add_argument("--text", action="store_true", help="Export text files only")
+    convert_parser.add_argument("--samples", action="store_true", help="Export gaze samples CSV only")
     convert_parser.set_defaults(func=cmd_convert)
+
+    # Export samples command
+    export_parser = subparsers.add_parser("export-samples", help="Export gaze samples to CSV")
+    export_parser.add_argument("data_file", help="Path to the ASC or JSON file")
+    export_parser.add_argument("-o", "--output", help="Output CSV file path (default: <filename>_samples.csv)")
+    export_parser.set_defaults(func=cmd_export_samples)
 
     # Info command
     info_parser = subparsers.add_parser("info", help="Show session information")

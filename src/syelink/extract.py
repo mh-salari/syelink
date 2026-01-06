@@ -18,7 +18,9 @@ from syelink.models import (
     CornerCorrection,
     DisplayCoords,
     EyeCalibration,
+    GazeSample,
     PolynomialCoefficients,
+    RawPupilData,
     RecordingData,
     SessionData,
     ValidationData,
@@ -394,6 +396,212 @@ def parse_display_coords(asc_path: str | Path) -> DisplayCoords | None:
     return None
 
 
+def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
+    """Parse gaze samples and raw pupil/CR data from ASC file.
+
+    Extracts all gaze samples from recording segments with mode, tracking parameters,
+    and optional raw pupil/CR data (when available in RECORD mode).
+
+    Args:
+        asc_path: Path to the ASC file
+
+    Returns:
+        List of GazeSample objects with gaze and optional raw data
+
+    """
+    asc_path = Path(asc_path)
+
+    # Patterns for parsing
+    mode_pattern = re.compile(
+        r"^MSG\s+(\d+)\s+!MODE\s+(RECORD|CALIBRATE|VALIDATE|OFFLINE)\s+(\S+)\s+(\d+)\s+\d+\s+\d+\s+([LR]{1,2})"
+    )
+    start_pattern = re.compile(r"^START\s+(\d+)")
+    end_pattern = re.compile(r"^END\s+(\d+)")
+    sample_pattern = re.compile(
+        r"^(\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+(\S+)"
+    )
+
+    # Raw message patterns for different recording modes
+    # Binocular: MSG msg_ts L sample_ts <11 left values> R <11 right values>
+    raw_msg_binocular = re.compile(
+        r"^MSG\s+\d+\s+L\s+(\d+\.\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+R\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)"
+    )
+    # Left eye only: MSG msg_ts L sample_ts <11 left values>
+    raw_msg_left_only = re.compile(
+        r"^MSG\s+\d+\s+L\s+(\d+\.\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)$"
+    )
+    # Right eye only: MSG msg_ts R sample_ts <11 right values>
+    raw_msg_right_only = re.compile(
+        r"^MSG\s+\d+\s+R\s+(\d+\.\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)$"
+    )
+
+    # Helper to check if value is a sentinel indicating missing/invalid data
+    def is_missing(val: float) -> bool:
+        """Check if a value is an EyeLink sentinel for missing data.
+
+        EyeLink uses specific sentinel values instead of NaN or None:
+        - -32768.0: Standard sentinel for missing signed integer data (pupil/CR positions)
+        - 4294934528.0: Sentinel for unsigned integer overflow (pupil/CR width/height)
+        - abs(val - 4294934528.0) < 1.0: Handles floating point precision issues
+
+        These appear when eye tracking is lost (blink, tracking failure, CR not detected, etc.)
+
+        """
+        # Check exact sentinel values or floating point approximation
+        return val in {-32768.0, 4294934528.0} or abs(val - 4294934528.0) < 1.0
+
+    # PASS 1: Collect all raw pupil/CR data
+    raw_data_left = {}
+    raw_data_right = {}
+
+    # Helper to create RawPupilData from values
+    def create_raw_pupil_data(vals: list[float]) -> RawPupilData:
+        return RawPupilData(
+            pupil_x=vals[0] if not is_missing(vals[0]) else None,
+            pupil_y=vals[1] if not is_missing(vals[1]) else None,
+            pupil_area=vals[2] if not is_missing(vals[2]) else None,
+            pupil_width=vals[3] if not is_missing(vals[3]) else None,
+            pupil_height=vals[4] if not is_missing(vals[4]) else None,
+            cr_x=vals[5] if not is_missing(vals[5]) else None,
+            cr_y=vals[6] if not is_missing(vals[6]) else None,
+            cr_area=vals[7] if not is_missing(vals[7]) else None,
+            cr2_x=vals[8] if not is_missing(vals[8]) else None,
+            cr2_y=vals[9] if not is_missing(vals[9]) else None,
+            cr2_area=vals[10] if not is_missing(vals[10]) else None,
+        )
+
+    with asc_path.open(encoding="utf-8") as f:
+        for line in f:
+            # Try binocular pattern first (most common)
+            binocular_match = raw_msg_binocular.match(line)
+            if binocular_match:
+                sample_ts = int(float(binocular_match.group(1)))
+                # Left eye data (groups 2-12)
+                left_vals = [float(binocular_match.group(i)) for i in range(2, 13)]
+                raw_data_left[sample_ts] = create_raw_pupil_data(left_vals)
+                # Right eye data (groups 13-23)
+                right_vals = [float(binocular_match.group(i)) for i in range(13, 24)]
+                raw_data_right[sample_ts] = create_raw_pupil_data(right_vals)
+                continue
+
+            # Try left eye only pattern
+            left_match = raw_msg_left_only.match(line)
+            if left_match:
+                sample_ts = int(float(left_match.group(1)))
+                left_vals = [float(left_match.group(i)) for i in range(2, 13)]
+                raw_data_left[sample_ts] = create_raw_pupil_data(left_vals)
+                continue
+
+            # Try right eye only pattern
+            right_match = raw_msg_right_only.match(line)
+            if right_match:
+                sample_ts = int(float(right_match.group(1)))
+                right_vals = [float(right_match.group(i)) for i in range(2, 13)]
+                raw_data_right[sample_ts] = create_raw_pupil_data(right_vals)
+
+    # PASS 2: Parse gaze samples and link to raw data
+    samples = []
+    current_segment = 0
+    current_mode = None
+    tracking_mode = None
+    sample_rate = None
+    eyes_tracked = None
+    in_segment = False
+
+    with asc_path.open(encoding="utf-8") as f:
+        for line in f:
+            # Check for mode change
+            mode_match = mode_pattern.match(line)
+            if mode_match:
+                current_mode = mode_match.group(2)
+                tracking_mode = mode_match.group(3)
+                sample_rate = int(mode_match.group(4))
+                eyes_tracked = mode_match.group(5)
+                continue
+
+            # Check for segment START
+            start_match = start_pattern.match(line)
+            if start_match:
+                current_segment += 1
+                in_segment = True
+                continue
+
+            # Check for segment END
+            end_match = end_pattern.match(line)
+            if end_match:
+                in_segment = False
+                continue
+
+            # Skip if not in a segment
+            if not in_segment or current_mode is None:
+                continue
+
+            # Check for gaze sample
+            sample_match = sample_pattern.match(line)
+            if sample_match:
+                timestamp = int(sample_match.group(1))
+
+                # Parse gaze data (dots "." indicate missing data)
+                try:
+                    left_x = float(sample_match.group(2))
+                except ValueError:
+                    left_x = None
+
+                try:
+                    left_y = float(sample_match.group(3))
+                except ValueError:
+                    left_y = None
+
+                try:
+                    left_pupil = float(sample_match.group(4))
+                except ValueError:
+                    left_pupil = None
+
+                try:
+                    right_x = float(sample_match.group(5))
+                except ValueError:
+                    right_x = None
+
+                try:
+                    right_y = float(sample_match.group(6))
+                except ValueError:
+                    right_y = None
+
+                try:
+                    right_pupil = float(sample_match.group(7))
+                except ValueError:
+                    right_pupil = None
+
+                status = sample_match.group(8)
+
+                # Look up raw data for this timestamp
+                left_raw = raw_data_left.get(timestamp)
+                right_raw = raw_data_right.get(timestamp)
+
+                # Create GazeSample
+                sample = GazeSample(
+                    timestamp=timestamp,
+                    segment=current_segment,
+                    mode=current_mode,
+                    tracking_mode=tracking_mode or "UNKNOWN",
+                    sample_rate=sample_rate or 1000,
+                    eyes_tracked=eyes_tracked or "LR",
+                    left_gaze_x=left_x,
+                    left_gaze_y=left_y,
+                    left_pupil=left_pupil,
+                    right_gaze_x=right_x,
+                    right_gaze_y=right_y,
+                    right_pupil=right_pupil,
+                    status=status,
+                    left_raw=left_raw,
+                    right_raw=right_raw,
+                )
+
+                samples.append(sample)
+
+    return samples
+
+
 def parse_asc_file(asc_path: str | Path) -> SessionData:
     """Parse an EyeLink ASC file and return structured session data.
 
@@ -452,9 +660,13 @@ def parse_asc_file(asc_path: str | Path) -> SessionData:
         RecordingData(start_time=rec["start"], end_time=rec["end"], content=rec["text"]) for rec in recordings
     ]
 
+    # Parse gaze samples
+    gaze_samples = parse_gaze_samples(asc_path)
+
     return SessionData(
         calibrations=parsed_calibrations,
         validations=parsed_validations,
         recordings=parsed_recordings,
+        gaze_samples=gaze_samples,
         display_coords=display_coords,
     )

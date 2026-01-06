@@ -17,7 +17,7 @@ For plotting:
     >>> fig = plot_validation(session, validation_index=0)
 """
 
-from syelink.extract import parse_asc_file
+from syelink.extract import parse_asc_file, parse_gaze_samples
 from syelink.models import (
     CalibrationData,
     CalibrationGains,
@@ -26,7 +26,9 @@ from syelink.models import (
     CornerCorrection,
     DisplayCoords,
     EyeCalibration,
+    GazeSample,
     PolynomialCoefficients,
+    RawPupilData,
     SessionData,
     ValidationData,
     ValidationPoint,
@@ -43,10 +45,13 @@ __all__ = [
     "CornerCorrection",
     "DisplayCoords",
     "EyeCalibration",
+    "GazeSample",
     "PolynomialCoefficients",
+    "RawPupilData",
     "SessionData",
     "ValidationData",
     "ValidationPoint",
     "ValidationSummary",
     "parse_asc_file",
+    "parse_gaze_samples",
 ]
