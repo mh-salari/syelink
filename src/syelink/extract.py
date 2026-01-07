@@ -417,8 +417,13 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
     )
     start_pattern = re.compile(r"^START\s+(\d+)")
     end_pattern = re.compile(r"^END\s+(\d+)")
-    sample_pattern = re.compile(
+    # Binocular sample pattern: timestamp left_x left_y left_pupil right_x right_y right_pupil status
+    sample_pattern_binocular = re.compile(
         r"^(\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+(\S+)"
+    )
+    # Monocular sample pattern: timestamp x y pupil status
+    sample_pattern_monocular = re.compile(
+        r"^(\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+(\S+)"
     )
 
     # Raw message patterns for different recording modes
@@ -536,9 +541,10 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
             if not in_segment or current_mode is None:
                 continue
 
-            # Check for gaze sample
-            sample_match = sample_pattern.match(line)
+            # Check for gaze sample - try binocular first, then monocular
+            sample_match = sample_pattern_binocular.match(line)
             if sample_match:
+                # Binocular data
                 timestamp = int(sample_match.group(1))
 
                 # Parse gaze data (dots "." indicate missing data)
@@ -573,31 +579,65 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
                     right_pupil = None
 
                 status = sample_match.group(8)
+            else:
+                # Try monocular pattern
+                sample_match = sample_pattern_monocular.match(line)
+                if sample_match:
+                    # Monocular data - assign to left or right based on eyes_tracked
+                    timestamp = int(sample_match.group(1))
 
-                # Look up raw data for this timestamp
-                left_raw = raw_data_left.get(timestamp)
-                right_raw = raw_data_right.get(timestamp)
+                    try:
+                        gaze_x = float(sample_match.group(2))
+                    except ValueError:
+                        gaze_x = None
 
-                # Create GazeSample
-                sample = GazeSample(
-                    timestamp=timestamp,
-                    segment=current_segment,
-                    mode=current_mode,
-                    tracking_mode=tracking_mode or "UNKNOWN",
-                    sample_rate=sample_rate or 1000,
-                    eyes_tracked=eyes_tracked or "LR",
-                    left_gaze_x=left_x,
-                    left_gaze_y=left_y,
-                    left_pupil=left_pupil,
-                    right_gaze_x=right_x,
-                    right_gaze_y=right_y,
-                    right_pupil=right_pupil,
-                    status=status,
-                    left_raw=left_raw,
-                    right_raw=right_raw,
-                )
+                    try:
+                        gaze_y = float(sample_match.group(3))
+                    except ValueError:
+                        gaze_y = None
 
-                samples.append(sample)
+                    try:
+                        pupil = float(sample_match.group(4))
+                    except ValueError:
+                        pupil = None
+
+                    status = sample_match.group(5)
+
+                    # Assign to left or right eye based on eyes_tracked
+                    if eyes_tracked == "L":
+                        left_x, left_y, left_pupil = gaze_x, gaze_y, pupil
+                        right_x, right_y, right_pupil = None, None, None
+                    else:  # eyes_tracked == "R"
+                        left_x, left_y, left_pupil = None, None, None
+                        right_x, right_y, right_pupil = gaze_x, gaze_y, pupil
+                else:
+                    # Not a sample line, skip
+                    continue
+
+            # Look up raw data for this timestamp (for both binocular and monocular)
+            left_raw = raw_data_left.get(timestamp)
+            right_raw = raw_data_right.get(timestamp)
+
+            # Create GazeSample
+            sample = GazeSample(
+                timestamp=timestamp,
+                segment=current_segment,
+                mode=current_mode,
+                tracking_mode=tracking_mode or "UNKNOWN",
+                sample_rate=sample_rate or 1000,
+                eyes_tracked=eyes_tracked or "LR",
+                left_gaze_x=left_x,
+                left_gaze_y=left_y,
+                left_pupil=left_pupil,
+                right_gaze_x=right_x,
+                right_gaze_y=right_y,
+                right_pupil=right_pupil,
+                status=status,
+                left_raw=left_raw,
+                right_raw=right_raw,
+            )
+
+            samples.append(sample)
 
     return samples
 
