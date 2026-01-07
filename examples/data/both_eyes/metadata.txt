@@ -1,0 +1,38 @@
+--------------------------------------------------------------------------------
+CALIBRATIONS
+--------------------------------------------------------------------------------
+[1] Calibration @ 319073ms (HV9)
+    MSG	319074 !CAL CALIBRATION HV9 LR LEFT    GOOD
+    MSG	319074 !CAL CALIBRATION HV9 LR RIGHT   GOOD
+[2] Calibration @ 497133ms (HV9)
+    MSG	497134 !CAL CALIBRATION HV9 LR LEFT    GOOD
+    MSG	497134 !CAL CALIBRATION HV9 LR RIGHT   GOOD
+--------------------------------------------------------------------------------
+VALIDATIONS
+--------------------------------------------------------------------------------
+[1] Validation @ 336268ms (HV9)
+    MSG	336268 !CAL VALIDATION HV9 LR LEFT  GOOD ERROR 0.72 avg. 1.03 max  OFFSET 0.71 deg. -32.2,-25.8 pix.
+    MSG	336268 !CAL VALIDATION HV9 LR RIGHT GOOD ERROR 0.57 avg. 1.44 max  OFFSET 0.45 deg. 6.9,25.6 pix.
+[2] Validation @ 454617ms (HV9)
+    MSG	454617 !CAL VALIDATION HV9 LR LEFT  GOOD ERROR 0.59 avg. 0.74 max  OFFSET 0.57 deg. -28.0,-18.1 pix.
+    MSG	454617 !CAL VALIDATION HV9 LR RIGHT GOOD ERROR 0.50 avg. 1.37 max  OFFSET 0.41 deg. 2.9,23.7 pix.
+[3] Validation @ 482523ms (HV9)
+    MSG	482523 !CAL VALIDATION HV9 LR LEFT  POOR ERROR 3.66 avg. 4.21 max  OFFSET 3.64 deg. 28.8,213.8 pix.
+    MSG	482523 !CAL VALIDATION HV9 LR RIGHT POOR ERROR 1.38 avg. 2.08 max  OFFSET 1.36 deg. -78.1,-14.4 pix.
+[4] Validation @ 513407ms (HV9)
+    MSG	513407 !CAL VALIDATION HV9 LR LEFT  GOOD ERROR 0.37 avg. 0.61 max  OFFSET 0.20 deg. 5.7,10.0 pix.
+    MSG	513407 !CAL VALIDATION HV9 LR RIGHT GOOD ERROR 0.36 avg. 0.80 max  OFFSET 0.27 deg. -5.8,14.6 pix.
+[5] Validation @ 631029ms (HV9)
+    MSG	631029 !CAL VALIDATION HV9 LR LEFT  GOOD ERROR 0.30 avg. 0.55 max  OFFSET 0.25 deg. 11.0,9.8 pix.
+    MSG	631029 !CAL VALIDATION HV9 LR RIGHT GOOD ERROR 0.34 avg. 1.29 max  OFFSET 0.23 deg. -9.1,10.1 pix.
+[6] Validation @ 667006ms (HV9)
+    MSG	667006 !CAL VALIDATION HV9 LR LEFT  POOR ERROR 2.99 avg. 3.29 max  OFFSET 2.98 deg. -40.8,-168.6 pix.
+    MSG	667006 !CAL VALIDATION HV9 LR RIGHT FAIR ERROR 1.26 avg. 1.87 max  OFFSET 1.14 deg. 48.6,45.1 pix.
+--------------------------------------------------------------------------------
+RECORDINGS
+--------------------------------------------------------------------------------
+
+[1] Recording: 349581ms - 384894ms (Duration: 35313ms)
+[2] Recording: 397329ms - 432440ms (Duration: 35111ms)
+[3] Recording: 525834ms - 560955ms (Duration: 35121ms)
+[4] Recording: 567388ms - 602495ms (Duration: 35107ms)

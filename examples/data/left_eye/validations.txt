@@ -1,0 +1,90 @@
+================================================================================
+VALIDATION #1 (Timestamp: 852353, Type: HV9)
+================================================================================
+MSG	852353 !CAL VALIDATION HV9 L LEFT  GOOD ERROR 0.43 avg. 0.71 max  OFFSET 0.18 deg. -7.9,6.7 pix.
+MSG	852353 VALIDATE L POINT 0  LEFT  at 640,512  OFFSET 0.56 deg.  -26.5,19.3 pix.
+MSG	852353 VALIDATE L POINT 1  LEFT  at 640,87  OFFSET 0.29 deg.  11.6,12.1 pix.
+MSG	852353 VALIDATE L POINT 2  LEFT  at 640,936  OFFSET 0.22 deg.  8.3,9.4 pix.
+MSG	852353 VALIDATE L POINT 3  LEFT  at 77,512  OFFSET 0.51 deg.  0.7,-29.9 pix.
+MSG	852353 VALIDATE L POINT 4  LEFT  at 1202,512  OFFSET 0.13 deg.  6.5,-3.7 pix.
+MSG	852353 VALIDATE L POINT 5  LEFT  at 144,138  OFFSET 0.66 deg.  22.9,31.3 pix.
+MSG	852353 VALIDATE L POINT 6  LEFT  at 1135,138  OFFSET 0.31 deg.  -6.6,16.9 pix.
+MSG	852353 VALIDATE L POINT 7  LEFT  at 144,885  OFFSET 0.09 deg.  -2.5,-4.5 pix.
+MSG	852353 VALIDATE L POINT 8  LEFT  at 1135,885  OFFSET 0.71 deg.  -14.6,-39.2 pix.
+
+
+================================================================================
+VALIDATION #2 (Timestamp: 956423, Type: HV9)
+================================================================================
+MSG	956423 !CAL VALIDATION HV9 L LEFT  GOOD ERROR 0.29 avg. 0.97 max  OFFSET 0.05 deg. 0.8,-2.6 pix.
+MSG	956423 VALIDATE L POINT 0  LEFT  at 640,512  OFFSET 0.24 deg.  -0.9,-14.2 pix.
+MSG	956423 VALIDATE L POINT 1  LEFT  at 640,87  OFFSET 0.25 deg.  9.2,11.5 pix.
+MSG	956423 VALIDATE L POINT 2  LEFT  at 640,936  OFFSET 0.42 deg.  -24.3,3.8 pix.
+MSG	956423 VALIDATE L POINT 3  LEFT  at 77,512  OFFSET 0.07 deg.  3.8,-0.8 pix.
+MSG	956424 VALIDATE L POINT 4  LEFT  at 1202,512  OFFSET 0.14 deg.  0.0,-8.2 pix.
+MSG	956424 VALIDATE L POINT 5  LEFT  at 144,138  OFFSET 0.97 deg.  33.5,45.8 pix.
+MSG	956424 VALIDATE L POINT 6  LEFT  at 1135,138  OFFSET 0.55 deg.  11.6,30.0 pix.
+MSG	956424 VALIDATE L POINT 7  LEFT  at 144,885  OFFSET 0.36 deg.  -8.1,-19.6 pix.
+MSG	956424 VALIDATE L POINT 8  LEFT  at 1135,885  OFFSET 0.21 deg.  9.2,-7.9 pix.
+
+
+================================================================================
+VALIDATION #3 (Timestamp: 984029, Type: HV9)
+================================================================================
+MSG	984029 !CAL VALIDATION HV9 L LEFT  POOR ERROR 3.58 avg. 3.73 max  OFFSET 3.55 deg. 52.0,205.4 pix.
+MSG	984029 VALIDATE L POINT 0  LEFT  at 640,512  OFFSET 3.73 deg.  47.5,218.0 pix.
+MSG	984029 VALIDATE L POINT 1  LEFT  at 640,87  OFFSET 3.18 deg.  34.0,187.0 pix.
+MSG	984029 VALIDATE L POINT 2  LEFT  at 640,936  OFFSET 3.42 deg.  75.3,189.9 pix.
+MSG	984029 VALIDATE L POINT 3  LEFT  at 77,512  OFFSET 3.35 deg.  -8.7,200.2 pix.
+MSG	984029 VALIDATE L POINT 4  LEFT  at 1202,512  OFFSET 3.69 deg.  93.2,199.6 pix.
+MSG	984029 VALIDATE L POINT 5  LEFT  at 144,138  OFFSET 3.35 deg.  12.8,199.8 pix.
+MSG	984029 VALIDATE L POINT 6  LEFT  at 1135,138  OFFSET 3.48 deg.  71.9,195.1 pix.
+MSG	984029 VALIDATE L POINT 7  LEFT  at 144,885  OFFSET 3.47 deg.  37.8,203.8 pix.
+MSG	984029 VALIDATE L POINT 8  LEFT  at 1135,885  OFFSET 3.24 deg.  85.2,173.5 pix.
+
+
+================================================================================
+VALIDATION #4 (Timestamp: 1016608, Type: HV9)
+================================================================================
+MSG	1016608 !CAL VALIDATION HV9 L LEFT  GOOD ERROR 0.27 avg. 0.45 max  OFFSET 0.23 deg. 1.8,-13.1 pix.
+MSG	1016608 VALIDATE L POINT 0  LEFT  at 640,512  OFFSET 0.25 deg.  4.3,-14.2 pix.
+MSG	1016608 VALIDATE L POINT 1  LEFT  at 640,87  OFFSET 0.37 deg.  0.4,-21.7 pix.
+MSG	1016608 VALIDATE L POINT 2  LEFT  at 640,936  OFFSET 0.16 deg.  -9.1,-1.2 pix.
+MSG	1016608 VALIDATE L POINT 3  LEFT  at 77,512  OFFSET 0.30 deg.  3.1,-17.3 pix.
+MSG	1016608 VALIDATE L POINT 4  LEFT  at 1202,512  OFFSET 0.45 deg.  -2.0,-26.2 pix.
+MSG	1016608 VALIDATE L POINT 5  LEFT  at 144,138  OFFSET 0.28 deg.  14.8,-6.6 pix.
+MSG	1016608 VALIDATE L POINT 6  LEFT  at 1135,138  OFFSET 0.22 deg.  -9.9,8.6 pix.
+MSG	1016608 VALIDATE L POINT 7  LEFT  at 144,885  OFFSET 0.21 deg.  8.5,-8.8 pix.
+MSG	1016608 VALIDATE L POINT 8  LEFT  at 1135,885  OFFSET 0.17 deg.  2.6,-9.3 pix.
+
+
+================================================================================
+VALIDATION #5 (Timestamp: 1127323, Type: HV9)
+================================================================================
+MSG	1127323 !CAL VALIDATION HV9 L LEFT  GOOD ERROR 0.25 avg. 0.46 max  OFFSET 0.21 deg. -11.0,-5.1 pix.
+MSG	1127323 VALIDATE L POINT 0  LEFT  at 640,512  OFFSET 0.15 deg.  -8.5,1.1 pix.
+MSG	1127323 VALIDATE L POINT 1  LEFT  at 640,87  OFFSET 0.42 deg.  -4.7,-24.2 pix.
+MSG	1127323 VALIDATE L POINT 2  LEFT  at 640,936  OFFSET 0.46 deg.  -26.5,-2.7 pix.
+MSG	1127323 VALIDATE L POINT 3  LEFT  at 77,512  OFFSET 0.27 deg.  -14.4,-6.4 pix.
+MSG	1127323 VALIDATE L POINT 4  LEFT  at 1202,512  OFFSET 0.23 deg.  -12.8,-4.2 pix.
+MSG	1127323 VALIDATE L POINT 5  LEFT  at 144,138  OFFSET 0.39 deg.  -10.8,-20.2 pix.
+MSG	1127323 VALIDATE L POINT 6  LEFT  at 1135,138  OFFSET 0.34 deg.  -20.1,-1.0 pix.
+MSG	1127323 VALIDATE L POINT 7  LEFT  at 144,885  OFFSET 0.28 deg.  0.8,-16.1 pix.
+MSG	1127323 VALIDATE L POINT 8  LEFT  at 1135,885  OFFSET 0.10 deg.  -5.8,1.8 pix.
+
+
+================================================================================
+VALIDATION #6 (Timestamp: 1155081, Type: HV9)
+================================================================================
+MSG	1155081 !CAL VALIDATION HV9 L LEFT  POOR ERROR 3.70 avg. 4.29 max  OFFSET 3.69 deg. -74.3,-199.8 pix.
+MSG	1155081 VALIDATE L POINT 0  LEFT  at 640,512  OFFSET 4.11 deg.  -86.2,-221.4 pix.
+MSG	1155081 VALIDATE L POINT 1  LEFT  at 640,87  OFFSET 2.76 deg.  -34.0,-156.2 pix.
+MSG	1155081 VALIDATE L POINT 2  LEFT  at 640,936  OFFSET 3.01 deg.  -46.3,-167.9 pix.
+MSG	1155081 VALIDATE L POINT 3  LEFT  at 77,512  OFFSET 3.54 deg.  -40.9,-200.3 pix.
+MSG	1155081 VALIDATE L POINT 4  LEFT  at 1202,512  OFFSET 3.48 deg.  -91.2,-179.2 pix.
+MSG	1155081 VALIDATE L POINT 5  LEFT  at 144,138  OFFSET 3.24 deg.  -47.5,-181.1 pix.
+MSG	1155081 VALIDATE L POINT 6  LEFT  at 1135,138  OFFSET 2.65 deg.  -65.0,-138.9 pix.
+MSG	1155081 VALIDATE L POINT 7  LEFT  at 144,885  OFFSET 3.16 deg.  -47.5,-176.3 pix.
+MSG	1155081 VALIDATE L POINT 8  LEFT  at 1135,885  OFFSET 4.29 deg.  -119.4,-217.6 pix.
+
+
