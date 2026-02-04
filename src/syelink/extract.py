@@ -402,6 +402,11 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
     Extracts all gaze samples from recording segments with mode, tracking parameters,
     and optional raw pupil/CR data (when available in RECORD mode).
 
+    In CALIBRATE and VALIDATE modes, the EyeLink sample line "gaze" fields actually
+    contain raw pupil coordinates in camera sensor units (per EyeLink docs: "GAZE =
+    pupil position for calibration"). These are placed in left_raw/right_raw.pupil_x/y
+    instead of left_gaze_x/y, and gaze fields are set to None.
+
     Args:
         asc_path: Path to the ASC file
 
@@ -422,9 +427,7 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
         r"^(\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+(\S+)"
     )
     # Monocular sample pattern: timestamp x y pupil status
-    sample_pattern_monocular = re.compile(
-        r"^(\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+(\S+)"
-    )
+    sample_pattern_monocular = re.compile(r"^(\d+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+(\S+)")
 
     # Raw message patterns for different recording modes
     # Binocular: MSG msg_ts L sample_ts <11 left values> R <11 right values>
@@ -617,6 +620,37 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
             # Look up raw data for this timestamp (for both binocular and monocular)
             left_raw = raw_data_left.get(timestamp)
             right_raw = raw_data_right.get(timestamp)
+
+            # In CALIBRATE/VALIDATE modes, sample line "gaze" values are actually
+            # raw pupil coordinates in camera sensor units (per EyeLink docs:
+            # "GAZE = pupil position for calibration"). Route them to raw data
+            # instead of gaze, and clear gaze since it's not available in these modes.
+            # CR data is not available during cal/val (only via MSG lines in RECORD mode).
+            if current_mode in {"CALIBRATE", "VALIDATE"}:
+                if left_x is not None or left_y is not None:
+                    left_raw = RawPupilData(
+                        pupil_x=left_x,
+                        pupil_y=left_y,
+                        pupil_area=None,
+                        pupil_width=None,
+                        pupil_height=None,
+                        cr_x=None,
+                        cr_y=None,
+                        cr_area=None,
+                    )
+                if right_x is not None or right_y is not None:
+                    right_raw = RawPupilData(
+                        pupil_x=right_x,
+                        pupil_y=right_y,
+                        pupil_area=None,
+                        pupil_width=None,
+                        pupil_height=None,
+                        cr_x=None,
+                        cr_y=None,
+                        cr_area=None,
+                    )
+                left_x, left_y = None, None
+                right_x, right_y = None, None
 
             # Create GazeSample
             sample = GazeSample(

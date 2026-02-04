@@ -493,8 +493,12 @@ class RawPupilData:
 class GazeSample:
     """Single gaze sample with optional raw pupil/CR data.
 
-    Gaze data is always present (from sample lines in ASC file).
-    Raw pupil/CR data is only present in RECORD mode when raw recording was enabled.
+    In RECORD mode: gaze fields contain screen gaze coordinates; raw fields contain
+    camera-sensor pupil/CR data (when raw recording is enabled via MSG lines).
+
+    In CALIBRATE/VALIDATE modes: gaze fields are None (no screen gaze available);
+    raw fields contain pupil coordinates from the sample line (EyeLink reports raw
+    pupil position in the "gaze" field during calibration). CR data is not available.
     """
 
     timestamp: int  # Sample timestamp in milliseconds
@@ -504,7 +508,7 @@ class GazeSample:
     sample_rate: int  # Sampling rate in Hz (e.g., 1000)
     eyes_tracked: str  # "L", "R", or "LR"
 
-    # Gaze data (always present)
+    # Gaze data (screen coordinates in RECORD mode; None in CALIBRATE/VALIDATE)
     left_gaze_x: float | None
     left_gaze_y: float | None
     left_pupil: float | None
@@ -513,7 +517,7 @@ class GazeSample:
     right_pupil: float | None
     status: str  # Status flags (e.g., "...C.", ".C..R")
 
-    # Raw pupil/CR data (only in RECORD mode with raw recording)
+    # Raw pupil/CR data (from MSG lines in RECORD mode; from sample line in CALIBRATE/VALIDATE)
     left_raw: RawPupilData | None = None
     right_raw: RawPupilData | None = None
 
