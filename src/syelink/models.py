@@ -68,10 +68,10 @@ class CalibrationPoint:
 
     RAW coordinates: Pupil/camera coordinates from the eye tracker sensor (small values, ~-60 to 0 range).
     HREF coordinates: Head-Referenced Eye Angle in angular units (~260+ units per visual degree).
-                      Range approximately -2600 to +2600 for X, -2000 to +2000 for Y.
+    Range approximately -2600 to +2600 for X, -2000 to +2000 for Y.
 
-    Format in ASC file: MSG <timestamp> !CAL <raw_x>, <raw_y>  <href_x>, <href_y>
-    Example: MSG 270129 !CAL -55.7, -114.5  -2521, 2003
+    Format in ASC file: ``MSG <timestamp> !CAL <raw_x>, <raw_y>  <href_x>, <href_y>``
+    Example: ``MSG 270129 !CAL -55.7, -114.5  -2521, 2003``
     """
 
     point_number: int  # 1-9 for calibration points, 10 is origin (0,0)
