@@ -1,7 +1,7 @@
 # syelink
 
 [![PyPI version](https://img.shields.io/pypi/v/syelink)](https://pypi.org/project/syelink/)
-[![Downloads](https://img.shields.io/pypi/dm/syelink)](https://pypi.org/project/syelink/)
+[![Downloads](https://img.shields.io/pypi/dt/syelink)](https://pypi.org/project/syelink/)
 [![License](https://img.shields.io/pypi/l/syelink)](https://github.com/mh-salari/syelink/blob/main/LICENSE)
 <!-- [![DOI](https://img.shields.io/badge/DOI-TODO-blue)](https://doi.org/TODO) -->
 
