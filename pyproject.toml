@@ -1,7 +1,7 @@
 [project]
 name = "syelink"
 dynamic = ["version"]
-description = "Parse and analyze EyeLink eye tracker data from ASC files"
+description = "Parse EyeLink eye tracker data from ASC files"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}

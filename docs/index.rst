@@ -1,7 +1,7 @@
 SyeLink Documentation
 =====================
 
-|PyPI| |Downloads| |License| |DOI|
+|PyPI| |Downloads| |License| |Documentation| |DOI|
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/syelink
    :target: https://pypi.org/project/syelink/
@@ -14,6 +14,10 @@ SyeLink Documentation
 .. |License| image:: https://img.shields.io/pypi/l/syelink
    :target: https://github.com/mh-salari/syelink/blob/main/LICENSE
    :alt: License
+
+.. |Documentation| image:: https://readthedocs.org/projects/syelink/badge/?version=latest
+   :target: https://syelink.readthedocs.io/
+   :alt: Documentation
 
 .. |DOI| image:: https://img.shields.io/badge/DOI-TODO-blue
    :target: https://doi.org/TODO

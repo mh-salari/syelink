@@ -304,7 +304,7 @@ def main() -> int:
     """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(
         prog="syelink",
-        description="Parse and visualize EyeLink eye tracker data",
+        description="Parse EyeLink eye tracker data",
     )
     parser.add_argument("--version", action="version", version="%(prog)s 0.1.0")
 

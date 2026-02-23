@@ -1,4 +1,4 @@
-"""syelink - Parse and analyze EyeLink eye tracker data.
+"""syelink - Parse EyeLink eye tracker data.
 
 This package provides tools for parsing EyeLink ASC files and extracting
 calibration, validation, and session data into structured Python objects.

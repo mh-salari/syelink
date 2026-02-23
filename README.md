@@ -3,9 +3,11 @@
 [![PyPI version](https://img.shields.io/pypi/v/syelink)](https://pypi.org/project/syelink/)
 [![Downloads](https://static.pepy.tech/badge/syelink)](https://pepy.tech/project/syelink)
 [![License](https://img.shields.io/pypi/l/syelink)](https://github.com/mh-salari/syelink/blob/main/LICENSE)
+[![Documentation](https://readthedocs.org/projects/syelink/badge/?version=latest)](https://syelink.readthedocs.io/)
 <!-- [![DOI](https://img.shields.io/badge/DOI-TODO-blue)](https://doi.org/TODO) -->
 
-Parse and visualize EyeLink eye tracker data from ASC files.
+Parse EyeLink eye tracker data from ASC files.
+For full documentation, see [syelink.readthedocs.io](https://syelink.readthedocs.io/).
 
 ## Features
 
