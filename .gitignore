@@ -8,6 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+uv.lock
+
+# Sphinx documentation
+docs/_build/
 
 .DS_Store
 tmp/
