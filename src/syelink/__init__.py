@@ -17,6 +17,8 @@ For plotting:
     >>> fig = plot_validation(session, validation_index=0)
 """
 
+from importlib.metadata import version as _get_version
+
 from syelink.extract import parse_asc_file, parse_gaze_samples
 from syelink.models import (
     CalibrationData,
@@ -35,7 +37,7 @@ from syelink.models import (
     ValidationSummary,
 )
 
-__version__ = "0.1.0"
+__version__ = _get_version("syelink")
 
 __all__ = [
     "CalibrationData",
