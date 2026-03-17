@@ -19,8 +19,8 @@ SyeLink Documentation
    :target: https://syelink.readthedocs.io/
    :alt: Documentation
 
-.. |DOI| image:: https://img.shields.io/badge/DOI-TODO-blue
-   :target: https://doi.org/TODO
+.. |DOI| image:: https://img.shields.io/badge/DOI-coming_soon-blue
+   :target: #
    :alt: DOI
 
 **SyeLink** is a Python library for parsing EyeLink eye tracker data from ASC files.
@@ -57,5 +57,14 @@ Features
    This project has received funding from the European Union's Horizon Europe
    research and innovation funding program under grant agreement No 101072410,
    Eyes4ICU project.
+
+.. note::
+
+   If you use SyeLink in your research, please cite:
+
+   Salari, M., Nyström, M., Niehorster, D. C., & Bednarik, R. (2026).
+   PyeLink and SyeLink: Open-source Python tools for low-level EyeLink experiment control and data parsing.
+   In *Proceedings of the 2026 Eye Tracking Research & Applications (ETRA 2026) Late-Breaking Work*. ACM.
+   *[Accepted; DOI forthcoming]*
 
 | Author: `Mohammadhossein Salari <https://mh-salari.ir>`_
