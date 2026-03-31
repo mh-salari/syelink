@@ -4,7 +4,7 @@
 [![Downloads](https://static.pepy.tech/badge/syelink)](https://pepy.tech/project/syelink)
 [![License](https://img.shields.io/pypi/l/syelink)](https://github.com/mh-salari/syelink/blob/main/LICENSE)
 [![Documentation](https://readthedocs.org/projects/syelink/badge/?version=latest)](https://syelink.readthedocs.io/)
-[![DOI](https://img.shields.io/badge/DOI-coming_soon-blue)](#citation)
+[![DOI](https://img.shields.io/badge/DOI-10.1145%2F3797246.3805844-blue)](https://doi.org/10.1145/3797246.3805844)
 
 Parse EyeLink eye tracker data from ASC files.
 For full documentation, see [syelink.readthedocs.io](https://syelink.readthedocs.io/).
@@ -177,13 +177,12 @@ Example data includes:
 
 ## Citation
 
-This work has been accepted for publication at ETRA 2026. The DOI will be added when the proceedings are published.
-
 **Cite as:**
 ```
 Salari, M., Nyström, M., Niehorster, D. C., & Bednarik, R. (2026).
 PyeLink and SyeLink: Open-source Python tools for low-level EyeLink experiment control and data parsing.
 In Proceedings of the 2026 Eye Tracking Research & Applications (ETRA 2026) Late-Breaking Work. ACM.
+DOI: 10.1145/3797246.3805844
 ```
 
 ## License
