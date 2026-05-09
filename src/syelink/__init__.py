@@ -19,7 +19,7 @@ For plotting:
 
 from importlib.metadata import version as _get_version
 
-from syelink.extract import parse_asc_file, parse_gaze_samples
+from syelink.extract import parse_asc_file, parse_gaze_samples, parse_messages
 from syelink.models import (
     CalibrationData,
     CalibrationGains,
@@ -29,6 +29,7 @@ from syelink.models import (
     DisplayCoords,
     EyeCalibration,
     GazeSample,
+    Message,
     PolynomialCoefficients,
     RawPupilData,
     SessionData,
@@ -48,6 +49,7 @@ __all__ = [
     "DisplayCoords",
     "EyeCalibration",
     "GazeSample",
+    "Message",
     "PolynomialCoefficients",
     "RawPupilData",
     "SessionData",
@@ -56,4 +58,5 @@ __all__ = [
     "ValidationSummary",
     "parse_asc_file",
     "parse_gaze_samples",
+    "parse_messages",
 ]

@@ -19,6 +19,7 @@ from syelink.models import (
     DisplayCoords,
     EyeCalibration,
     GazeSample,
+    Message,
     PolynomialCoefficients,
     RawPupilData,
     RecordingData,
@@ -676,6 +677,71 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
     return samples
 
 
+_MSG_LINE_RE = re.compile(r"^MSG\s+(\d+)\s+(.+?)\s*$")
+
+# Whitespace-bounded keywords that mark an EyeLink-internal MSG line. Anything
+# starting with one of these followed by space/tab/EOL is filtered out.
+_INTERNAL_TOKENS = frozenset({
+    "!CAL",
+    "!MODE",
+    "!V",
+    "!ERROR",
+    "!WARNING",
+    "!DRIFTCORRECT",
+    "!FRAME",
+    "DISPLAY_COORDS",
+    "GAZE_COORDS",
+    "RECCFG",
+    "ELCLCFG",
+    "THRESHOLDS",
+    "VALIDATE",
+    "RETRACE_INTERVAL",
+    "RETRACE_TIME",
+    "BUTTON",
+    "INPUT",
+    "CAMERA_LENS_FOCAL_LENGTH",
+    "PUPIL_DATA_TYPE",
+    # Raw pupil/CR data records embedded as MSG lines (one per sample in CR mode):
+    # `MSG <ts> L <floats...>` and `MSG <ts> R <floats...>`.
+    "L",
+    "R",
+})
+
+# String prefixes covering whole namespaces of internal lines (e.g. every
+# ELCL_* config line). Filter is a literal prefix match (no token boundary).
+_INTERNAL_NAMESPACES = ("ELCL_",)
+
+
+def _is_internal_message(text: str) -> bool:
+    """Return True if ``text`` is an EyeLink-internal MSG line, not sent by the user."""
+    first = text.split(maxsplit=1)[0] if text else ""
+    if first in _INTERNAL_TOKENS:
+        return True
+    return any(text.startswith(ns) for ns in _INTERNAL_NAMESPACES)
+
+
+def parse_messages(asc_path: str | Path) -> list[Message]:
+    """Return user-sent messages from the asc, in file order.
+
+    Each entry corresponds to one ``tracker.send_message(text)`` call during
+    the experiment (e.g. ``STEP_3_CALIBRATE_DARK_START``, ``TARGET x=960 y=540``).
+    EyeLink-internal MSG lines (calibration coefficients, validation results,
+    display setup, mode/config rows) are filtered out — they're already
+    represented as ``CalibrationData`` / ``ValidationData`` / ``DisplayCoords``.
+    """
+    messages: list[Message] = []
+    with Path(asc_path).open(encoding="utf-8") as f:
+        for line in f:
+            m = _MSG_LINE_RE.match(line)
+            if not m:
+                continue
+            ts, text = int(m.group(1)), m.group(2).strip()
+            if _is_internal_message(text):
+                continue
+            messages.append(Message(timestamp=ts, text=text))
+    return messages
+
+
 def parse_asc_file(asc_path: str | Path) -> SessionData:
     """Parse an EyeLink ASC file and return structured session data.
 
@@ -737,10 +803,14 @@ def parse_asc_file(asc_path: str | Path) -> SessionData:
     # Parse gaze samples
     gaze_samples = parse_gaze_samples(asc_path)
 
+    # Parse user-sent messages (filter out EyeLink-internal MSG lines)
+    messages = parse_messages(asc_path)
+
     return SessionData(
         calibrations=parsed_calibrations,
         validations=parsed_validations,
         recordings=parsed_recordings,
         gaze_samples=gaze_samples,
+        messages=messages,
         display_coords=display_coords,
     )

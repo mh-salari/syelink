@@ -552,6 +552,27 @@ class GazeSample:
 
 
 @dataclass
+class Message:
+    """One user-sent ``MSG <timestamp> <text>`` line from the asc file.
+
+    Each entry corresponds to one ``tracker.send_message(text)`` call during
+    the experiment (e.g. ``STEP_3_CALIBRATE_DARK_START``, ``TARGET x=960 y=540``).
+    EyeLink-internal MSG lines (calibration coefficients, validation results,
+    display setup, recording-mode/config rows, raw pupil/CR data) are filtered
+    out by the parser; they're already represented as ``CalibrationData`` /
+    ``ValidationData`` / ``DisplayCoords``.
+    """
+
+    timestamp: int  # Host-clock milliseconds.
+    text: str  # Everything after ``MSG <timestamp>``, with leading whitespace stripped.
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Message:
+        """Create a Message from a dict (e.g. loaded from JSON)."""
+        return cls(timestamp=int(data["timestamp"]), text=data["text"])
+
+
+@dataclass
 class SessionData:
     """Container for all session data."""
 
@@ -559,6 +580,7 @@ class SessionData:
     validations: list[ValidationData] = field(default_factory=list)
     recordings: list[RecordingData] = field(default_factory=list)
     gaze_samples: list[GazeSample] = field(default_factory=list)
+    messages: list[Message] = field(default_factory=list)
     display_coords: DisplayCoords | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -582,8 +604,7 @@ class SessionData:
 
     def save_json(self, filepath: str) -> None:
         """Save the session data to a JSON file."""
-        with Path(filepath).open("w", encoding="utf-8") as f:
-            f.write(self.to_json())
+        Path(filepath).write_text(self.to_json(), encoding="utf-8")
 
     def save_metadata(self, filepath: str | Path) -> None:
         """Save session metadata to a text file.
@@ -867,11 +888,13 @@ class SessionData:
         calibrations = [CalibrationData.from_dict(c) for c in data.get("calibrations", [])]
         validations = [ValidationData.from_dict(v) for v in data.get("validations", [])]
         recordings = [RecordingData.from_dict(r) for r in data.get("recordings", [])]
+        messages = [Message.from_dict(m) for m in data.get("messages", [])]
         display_coords = DisplayCoords.from_dict(data["display_coords"]) if data.get("display_coords") else None
         return cls(
             calibrations=calibrations,
             validations=validations,
             recordings=recordings,
+            messages=messages,
             display_coords=display_coords,
         )
 
