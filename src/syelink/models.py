@@ -914,12 +914,14 @@ class SessionData:
         validations = [ValidationData.from_dict(v) for v in data.get("validations", [])]
         recordings = [RecordingData.from_dict(r) for r in data.get("recordings", [])]
         messages = [Message.from_dict(m) for m in data.get("messages", [])]
+        gaze_samples = [GazeSample.from_dict(s) for s in data.get("gaze_samples", [])]
         display_coords = DisplayCoords.from_dict(data["display_coords"]) if data.get("display_coords") else None
         return cls(
             calibrations=calibrations,
             validations=validations,
             recordings=recordings,
             messages=messages,
+            gaze_samples=gaze_samples,
             display_coords=display_coords,
         )
 
