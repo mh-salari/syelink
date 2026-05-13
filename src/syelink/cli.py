@@ -16,24 +16,34 @@ from syelink.models import SessionData
 from syelink.plotting import plot_calibration_raw, plot_validation
 
 
-def load_session_data(file_path: Path) -> SessionData:
+def load_session_data(file_path: Path, href_path: Path | None = None) -> SessionData:
     """Load session data from either ASC or JSON file.
 
     Args:
         file_path: Path to ASC or JSON file
+        href_path: Optional path to a matching ``edf2asc -sh`` HREF ASC export.
+            Only valid when ``file_path`` is an ASC; for JSON input the HREF
+            columns are already serialized and ``href_path`` must be ``None``.
 
     Returns:
         SessionData object
 
     Raises:
-        ValueError: If file format is not supported
+        ValueError: If file format is not supported, or if ``href_path`` is
+            provided alongside a JSON input.
 
     """
     suffix = file_path.suffix.lower()
 
     if suffix == ".asc":
-        return parse_asc_file(file_path)
+        return parse_asc_file(file_path, href_asc_path=href_path)
     if suffix == ".json":
+        if href_path is not None:
+            msg = (
+                f"--href is only valid with ASC input; "
+                f"{file_path.name} is JSON and already contains HREF columns if they were merged at parse time."
+            )
+            raise ValueError(msg)
         return SessionData.load_json(str(file_path))
     msg = f"Unsupported file format: {file_path.name}\nExpected ASC or JSON file, got {suffix or 'no extension'}."
     raise ValueError(msg)
@@ -46,6 +56,13 @@ def cmd_convert(args: argparse.Namespace) -> int:
         print(f"Error: File not found: {asc_path}", file=sys.stderr)
         return 1
 
+    href_path: Path | None = None
+    if args.href:
+        href_path = Path(args.href)
+        if not href_path.exists():
+            print(f"Error: HREF file not found: {href_path}", file=sys.stderr)
+            return 1
+
     export_json = args.json
     export_text = args.text
     export_samples = args.samples
@@ -54,10 +71,13 @@ def cmd_convert(args: argparse.Namespace) -> int:
         export_text = True
         export_samples = True
 
-    print(f"Parsing {asc_path}...")
+    if href_path is not None:
+        print(f"Parsing {asc_path} (with HREF from {href_path.name})...")
+    else:
+        print(f"Parsing {asc_path}...")
 
     try:
-        session = parse_asc_file(asc_path)
+        session = parse_asc_file(asc_path, href_asc_path=href_path)
     except ValueError as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
@@ -100,6 +120,11 @@ def cmd_convert(args: argparse.Namespace) -> int:
     if session.gaze_samples:
         samples_with_raw = sum(1 for s in session.gaze_samples if s.left_raw or s.right_raw)
         print(f"  - {len(session.gaze_samples):,} gaze samples ({samples_with_raw:,} with raw pupil/CR data)")
+        if href_path is not None:
+            samples_with_href = sum(
+                1 for s in session.gaze_samples if s.left_href_x is not None or s.right_href_x is not None
+            )
+            print(f"  - {samples_with_href:,} samples with HREF coordinates")
     if session.display_coords:
         print(f"  - Display: {session.display_coords.width}x{session.display_coords.height}")
     print(f"\nAll files saved to: {output_dir}")
@@ -215,8 +240,15 @@ def cmd_export_samples(args: argparse.Namespace) -> int:
         print(f"Error: File not found: {file_path}", file=sys.stderr)
         return 1
 
+    href_path: Path | None = None
+    if args.href:
+        href_path = Path(args.href)
+        if not href_path.exists():
+            print(f"Error: HREF file not found: {href_path}", file=sys.stderr)
+            return 1
+
     try:
-        session = load_session_data(file_path)
+        session = load_session_data(file_path, href_path=href_path)
     except ValueError as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
@@ -246,6 +278,12 @@ def cmd_export_samples(args: argparse.Namespace) -> int:
     print(
         f"  ✓ Samples with raw pupil/CR data: {samples_with_raw:,} ({samples_with_raw / len(session.gaze_samples) * 100:.1f}%)"
     )
+    samples_with_href = sum(1 for s in session.gaze_samples if s.left_href_x is not None or s.right_href_x is not None)
+    if samples_with_href:
+        print(
+            f"  ✓ Samples with HREF coordinates: {samples_with_href:,} "
+            f"({samples_with_href / len(session.gaze_samples) * 100:.1f}%)"
+        )
 
     # Show file size
     size_mb = csv_path.stat().st_size / (1024 * 1024)
@@ -262,8 +300,15 @@ def cmd_info(args: argparse.Namespace) -> int:
         print(f"Error: File not found: {file_path}", file=sys.stderr)
         return 1
 
+    href_path: Path | None = None
+    if args.href:
+        href_path = Path(args.href)
+        if not href_path.exists():
+            print(f"Error: HREF file not found: {href_path}", file=sys.stderr)
+            return 1
+
     try:
-        session = load_session_data(file_path)
+        session = load_session_data(file_path, href_path=href_path)
     except ValueError as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
@@ -296,6 +341,14 @@ def cmd_info(args: argparse.Namespace) -> int:
         print(
             f"  - With raw pupil/CR data: {samples_with_raw:,} ({samples_with_raw / len(session.gaze_samples) * 100:.1f}%)"
         )
+        samples_with_href = sum(
+            1 for s in session.gaze_samples if s.left_href_x is not None or s.right_href_x is not None
+        )
+        if samples_with_href:
+            print(
+                f"  - With HREF coordinates: {samples_with_href:,} "
+                f"({samples_with_href / len(session.gaze_samples) * 100:.1f}%)"
+            )
 
     return 0
 
@@ -317,17 +370,29 @@ def main() -> int:
     convert_parser.add_argument("--json", action="store_true", help="Export JSON file only")
     convert_parser.add_argument("--text", action="store_true", help="Export text files only")
     convert_parser.add_argument("--samples", action="store_true", help="Export gaze samples CSV only")
+    convert_parser.add_argument(
+        "--href",
+        help="Path to a matching `edf2asc -sh` HREF ASC; merges per-sample HREF coordinates into the gaze samples",
+    )
     convert_parser.set_defaults(func=cmd_convert)
 
     # Export samples command
     export_parser = subparsers.add_parser("export-samples", help="Export gaze samples to CSV")
     export_parser.add_argument("data_file", help="Path to the ASC or JSON file")
     export_parser.add_argument("-o", "--output", help="Output CSV file path (default: <filename>_samples.csv)")
+    export_parser.add_argument(
+        "--href",
+        help="Path to a matching `edf2asc -sh` HREF ASC (only valid when data_file is an ASC)",
+    )
     export_parser.set_defaults(func=cmd_export_samples)
 
     # Info command
     info_parser = subparsers.add_parser("info", help="Show session information")
     info_parser.add_argument("data_file", help="Path to the ASC or JSON file")
+    info_parser.add_argument(
+        "--href",
+        help="Path to a matching `edf2asc -sh` HREF ASC (only valid when data_file is an ASC)",
+    )
     info_parser.set_defaults(func=cmd_info)
 
     # Plot validation command

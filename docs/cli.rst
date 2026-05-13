@@ -35,12 +35,16 @@ Convert an ASC file to structured output formats.
    syelink convert data.asc --text     # Text files only
    syelink convert data.asc --samples  # CSV samples only
 
+   # Merge HREF coordinates from a matching `edf2asc -sh` export:
+   syelink convert data_gaze.asc --href data_href.asc
+
 Options:
 
 - ``-o, --output`` -- Output directory (default: same directory as ASC file)
 - ``--json`` -- Export JSON file only
 - ``--text`` -- Export text files only
 - ``--samples`` -- Export gaze samples CSV only
+- ``--href`` -- Path to a matching ``edf2asc -sh`` HREF ASC; merges per-sample HREF coordinates into the gaze samples and exports them alongside in the JSON and CSV
 - Without flags: exports all formats (JSON + text + CSV)
 
 info
@@ -52,8 +56,14 @@ Show session information.
 
    syelink info data.json
    syelink info data.asc
+   syelink info data_gaze.asc --href data_href.asc
 
-Shows calibration/validation counts, display info, and gaze sample statistics.
+Shows calibration/validation counts, display info, and gaze sample statistics
+(including how many samples carry HREF coordinates when ``--href`` is used).
+
+Options:
+
+- ``--href`` -- Path to a matching ``edf2asc -sh`` HREF ASC (only valid when the input is an ASC; JSON inputs already carry HREF if it was merged at parse time)
 
 export-samples
 --------------
@@ -63,10 +73,12 @@ Export gaze samples to CSV.
 .. code-block:: bash
 
    syelink export-samples data.asc -o samples.csv
+   syelink export-samples data_gaze.asc --href data_href.asc -o samples.csv
 
 Options:
 
 - ``-o, --output`` -- Output CSV file path (default: ``<filename>_samples.csv``)
+- ``--href`` -- Path to a matching ``edf2asc -sh`` HREF ASC (only valid when the input is an ASC)
 
 plot-validation
 ---------------

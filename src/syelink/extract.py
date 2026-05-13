@@ -33,6 +33,9 @@ from syelink.parser import find_all_segments
 if TYPE_CHECKING:
     from typing import Any
 
+# Row layout returned by `parse_href_samples`: (l_hx, l_hy, l_pa, r_hx, r_hy, r_pa).
+HrefRow = tuple[float | None, float | None, float | None, float | None, float | None, float | None]
+
 
 def parse_calibration_points(text: str) -> list[CalibrationPoint]:
     """Parse calibration points from text block."""
@@ -677,6 +680,128 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
     return samples
 
 
+def parse_href_samples(href_asc_path: str | Path) -> dict[int, HrefRow]:
+    """Parse per-sample HREF coordinates from an ``edf2asc -sh`` ASC export.
+
+    The HREF ASC has the same SAMPLE-line cadence as the gaze ASC but the per-eye
+    coordinate columns carry head-referenced angular coordinates (HREF) instead of
+    screen pixels. Binocular column order matches the gaze ASC:
+
+        time  l_hx  l_hy  l_pa  r_hx  r_hy  r_pa  status
+
+    Only the binocular layout is supported here; the recordings this is built for
+    are all binocular. Missing columns (``"."``) are returned as ``None``.
+
+    Args:
+        href_asc_path: Path to an ``edf2asc -sh`` ASC export.
+
+    Returns:
+        ``{timestamp: (l_hx, l_hy, l_pa, r_hx, r_hy, r_pa)}``.
+
+    """
+    href_asc_path = Path(href_asc_path)
+
+    sample_pattern_binocular = re.compile(
+        r"^(\d+)\s+([-\d.]+|\.)\s+([-\d.]+|\.)\s+([-\d.]+|\.)\s+"
+        r"([-\d.]+|\.)\s+([-\d.]+|\.)\s+([-\d.]+|\.)\s+\S+"
+    )
+
+    def _to_float(value: str) -> float | None:
+        return None if value == "." else float(value)
+
+    href_data: dict[int, HrefRow] = {}
+
+    with href_asc_path.open(encoding="utf-8") as f:
+        for line in f:
+            m = sample_pattern_binocular.match(line)
+            if not m:
+                continue
+            ts = int(m.group(1))
+            href_data[ts] = (
+                _to_float(m.group(2)),
+                _to_float(m.group(3)),
+                _to_float(m.group(4)),
+                _to_float(m.group(5)),
+                _to_float(m.group(6)),
+                _to_float(m.group(7)),
+            )
+
+    return href_data
+
+
+def _merge_href_into_samples(
+    samples: list[GazeSample],
+    href_data: dict[int, HrefRow],
+    pupil_area_tol: float = 1e-6,
+) -> int:
+    """Attach HREF columns to gaze samples by timestamp; cross-check pupil_area.
+
+    For every sample whose timestamp is present in ``href_data``, fills the four
+    HREF fields. The pupil-area columns in the HREF ASC are the same EDF field as
+    ``left_pupil`` / ``right_pupil`` in the gaze ASC and agree at well-tracked
+    samples, so non-zero values are required to match. Zero / ``None`` on either
+    side is treated as a loss-of-track sentinel and skipped — ``edf2asc`` reports
+    loss-of-track differently in gaze vs HREF mode (the gaze export zeroes pupil
+    area when CR is lost since the screen mapping fails, while the HREF export
+    keeps the area on the eye that still produces an angular coordinate without
+    CR), so a per-sample mismatch on a degraded sample is not a wrong-pair error.
+
+    Args:
+        samples: Gaze samples to mutate in place.
+        href_data: Map from ``parse_href_samples``.
+        pupil_area_tol: Maximum allowed absolute difference between the gaze-ASC
+            pupil column and the HREF-ASC pupil-area column when both are present
+            and non-zero.
+
+    Returns:
+        Number of samples that received HREF coordinates.
+
+    Raises:
+        ValueError: If pupil_area disagrees between the two ASCs for any matched
+            timestamp where both sides report a non-zero value, indicating the
+            wrong file pair.
+
+    """
+    merged = 0
+    for sample in samples:
+        href = href_data.get(sample.timestamp)
+        if href is None:
+            continue
+        l_hx, l_hy, l_pa, r_hx, r_hy, r_pa = href
+
+        _check_pupil_area_match(sample.timestamp, "left", sample.left_pupil, l_pa, pupil_area_tol)
+        _check_pupil_area_match(sample.timestamp, "right", sample.right_pupil, r_pa, pupil_area_tol)
+
+        sample.left_href_x = l_hx
+        sample.left_href_y = l_hy
+        sample.right_href_x = r_hx
+        sample.right_href_y = r_hy
+        merged += 1
+
+    return merged
+
+
+def _check_pupil_area_match(
+    timestamp: int,
+    side: str,
+    gaze_pa: float | None,
+    href_pa: float | None,
+    tol: float,
+) -> None:
+    """Raise if pupil_area disagrees between the gaze and HREF ASCs at a matched sample."""
+    if gaze_pa is None or href_pa is None:
+        return
+    if gaze_pa == 0.0 or href_pa == 0.0:
+        return
+    if abs(gaze_pa - href_pa) > tol:
+        msg = (
+            f"pupil_area mismatch at timestamp {timestamp} ({side}): "
+            f"gaze ASC = {gaze_pa}, HREF ASC = {href_pa}. "
+            f"The HREF ASC does not appear to be exported from the same EDF as the gaze ASC."
+        )
+        raise ValueError(msg)
+
+
 _MSG_LINE_RE = re.compile(r"^MSG\s+(\d+)\s+(.+?)\s*$")
 
 # Whitespace-bounded keywords that mark an EyeLink-internal MSG line. Anything
@@ -742,7 +867,7 @@ def parse_messages(asc_path: str | Path) -> list[Message]:
     return messages
 
 
-def parse_asc_file(asc_path: str | Path) -> SessionData:
+def parse_asc_file(asc_path: str | Path, href_asc_path: str | Path | None = None) -> SessionData:
     """Parse an EyeLink ASC file and return structured session data.
 
     This is the main entry point for parsing ASC files. It extracts:
@@ -751,13 +876,21 @@ def parse_asc_file(asc_path: str | Path) -> SessionData:
     - All validation blocks with per-point errors and summary statistics
 
     Args:
-        asc_path: Path to the ASC file
+        asc_path: Path to the gaze-format ASC file (default ``edf2asc`` export).
+        href_asc_path: Optional path to a matching HREF-format ASC export
+            (``edf2asc -sh``). When provided, per-sample HREF coordinates are
+            merged into each gaze sample by timestamp and exposed as
+            ``left_href_x/y``, ``right_href_x/y``. Pupil area is cross-checked
+            against the gaze ASC to make sure the two files were exported from
+            the same EDF; a mismatch raises ``ValueError``.
 
     Returns:
         SessionData object containing all parsed data
 
     Raises:
-        ValueError: If the file is not an ASC file or is a binary file
+        ValueError: If the file is not an ASC file or is a binary file, or if
+            an HREF ASC is provided whose pupil-area column disagrees with the
+            gaze ASC at any matched timestamp.
 
     Example:
         >>> session = parse_asc_file("data/recording.asc")
@@ -802,6 +935,11 @@ def parse_asc_file(asc_path: str | Path) -> SessionData:
 
     # Parse gaze samples
     gaze_samples = parse_gaze_samples(asc_path)
+
+    # Optionally merge HREF coordinates from a matching `edf2asc -sh` export.
+    if href_asc_path is not None:
+        href_data = parse_href_samples(href_asc_path)
+        _merge_href_into_samples(gaze_samples, href_data)
 
     # Parse user-sent messages (filter out EyeLink-internal MSG lines)
     messages = parse_messages(asc_path)

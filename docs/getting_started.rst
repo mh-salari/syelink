@@ -76,6 +76,41 @@ Accessing gaze samples
    for sample in session.gaze_samples[:10]:
        print(f"Time: {sample.timestamp}, Left: ({sample.left_gaze_x}, {sample.left_gaze_y})")
 
+Including HREF coordinates
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The default ``edf2asc`` export writes screen-pixel gaze coordinates only. To also
+get head-referenced angular coordinates (HREF) per sample, export the same EDF a
+second time with ``edf2asc -sh`` and pass that file alongside the gaze ASC.
+
+Both invocations of ``edf2asc`` write to the same default filename
+(``recording.asc``), so the gaze export must be renamed before running the HREF
+export to avoid overwriting it:
+
+.. code-block:: bash
+
+   edf2asc recording.edf            # writes recording.asc (gaze)
+   mv recording.asc recording_gaze.asc
+
+   edf2asc -sh recording.edf        # writes recording.asc (HREF)
+   mv recording.asc recording_href.asc
+
+.. code-block:: python
+
+   session = parse_asc_file("recording_gaze.asc", href_asc_path="recording_href.asc")
+
+   for sample in session.gaze_samples[:10]:
+       print(
+           f"Time: {sample.timestamp}, "
+           f"left HREF: ({sample.left_href_x}, {sample.left_href_y})"
+       )
+
+HREF coordinates are merged by timestamp into the existing gaze samples and exposed
+as ``left_href_x``, ``left_href_y``, ``right_href_x``, ``right_href_y``. The pupil-area
+column is cross-checked between the two ASCs to make sure they were exported from
+the same EDF; a mismatch raises ``ValueError``. HREF units are EyeLink's internal
+angular units (~261.8 units / deg of visual angle).
+
 Examples
 --------
 

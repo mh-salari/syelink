@@ -499,6 +499,10 @@ class GazeSample:
     In CALIBRATE/VALIDATE modes: gaze fields are None (no screen gaze available);
     raw fields contain pupil coordinates from the sample line (EyeLink reports raw
     pupil position in the "gaze" field during calibration). CR data is not available.
+
+    HREF fields are populated only when an HREF-format ASC export (`edf2asc -sh`) is
+    passed alongside the gaze ASC to ``parse_asc_file``. Units are HREF angular units
+    (~261.8 units / deg of visual angle).
     """
 
     timestamp: int  # Sample timestamp in milliseconds
@@ -520,6 +524,12 @@ class GazeSample:
     # Raw pupil/CR data (from MSG lines in RECORD mode; from sample line in CALIBRATE/VALIDATE)
     left_raw: RawPupilData | None = None
     right_raw: RawPupilData | None = None
+
+    # HREF angular coordinates per eye (from an `edf2asc -sh` ASC merged by timestamp).
+    left_href_x: float | None = None
+    left_href_y: float | None = None
+    right_href_x: float | None = None
+    right_href_y: float | None = None
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> GazeSample:
@@ -548,6 +558,10 @@ class GazeSample:
             status=data["status"],
             left_raw=left_raw,
             right_raw=right_raw,
+            left_href_x=data.get("left_href_x"),
+            left_href_y=data.get("left_href_y"),
+            right_href_x=data.get("right_href_x"),
+            right_href_y=data.get("right_href_y"),
         )
 
 
@@ -809,6 +823,10 @@ class SessionData:
             "right_raw_cr2x",
             "right_raw_cr2y",
             "right_raw_cr2area",
+            "left_href_x",
+            "left_href_y",
+            "right_href_x",
+            "right_href_y",
         ]
 
         with filepath.open("w", newline="", encoding="utf-8") as f:
@@ -877,6 +895,13 @@ class SessionData:
                     })
                 else:
                     row.update({key: "" for key in headers if key.startswith("right_raw_")})
+
+                row.update({
+                    "left_href_x": sample.left_href_x if sample.left_href_x is not None else "",
+                    "left_href_y": sample.left_href_y if sample.left_href_y is not None else "",
+                    "right_href_x": sample.right_href_x if sample.right_href_x is not None else "",
+                    "right_href_y": sample.right_href_y if sample.right_href_y is not None else "",
+                })
 
                 writer.writerow(row)
 
