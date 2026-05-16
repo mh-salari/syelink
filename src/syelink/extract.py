@@ -404,12 +404,16 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
     """Parse gaze samples and raw pupil/CR data from ASC file.
 
     Extracts all gaze samples from recording segments with mode, tracking parameters,
-    and optional raw pupil/CR data (when available in RECORD mode).
+    and optional raw pupil/CR data.
+
+    Raw pupil + CR is parsed from ``MSG L/R …`` lines written by pyelink's raw thread.
+    These can be present in RECORD mode and, when the raw thread is also started
+    across ``do_tracker_setup``, in CALIBRATE/VALIDATE modes too.
 
     In CALIBRATE and VALIDATE modes, the EyeLink sample line "gaze" fields actually
     contain raw pupil coordinates in camera sensor units (per EyeLink docs: "GAZE =
-    pupil position for calibration"). These are placed in left_raw/right_raw.pupil_x/y
-    instead of left_gaze_x/y, and gaze fields are set to None.
+    pupil position for calibration"). They are used as a bare-pupil fallback for
+    timestamps with no MSG-derived raw record, and gaze fields are set to None.
 
     Args:
         asc_path: Path to the ASC file
@@ -629,9 +633,11 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
             # raw pupil coordinates in camera sensor units (per EyeLink docs:
             # "GAZE = pupil position for calibration"). Route them to raw data
             # instead of gaze, and clear gaze since it's not available in these modes.
-            # CR data is not available during cal/val (only via MSG lines in RECORD mode).
+            # If a MSG-derived raw record exists for this timestamp (pyelink's
+            # raw-thread-during-cal feature writes full pupil + CR via MSG lines
+            # across cal/val windows), keep it — the MSG record is richer.
             if current_mode in {"CALIBRATE", "VALIDATE"}:
-                if left_x is not None or left_y is not None:
+                if left_raw is None and (left_x is not None or left_y is not None):
                     left_raw = RawPupilData(
                         pupil_x=left_x,
                         pupil_y=left_y,
@@ -642,7 +648,7 @@ def parse_gaze_samples(asc_path: str | Path) -> list[GazeSample]:
                         cr_y=None,
                         cr_area=None,
                     )
-                if right_x is not None or right_y is not None:
+                if right_raw is None and (right_x is not None or right_y is not None):
                     right_raw = RawPupilData(
                         pupil_x=right_x,
                         pupil_y=right_y,
