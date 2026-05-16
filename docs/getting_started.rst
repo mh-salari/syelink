@@ -76,6 +76,37 @@ Accessing gaze samples
    for sample in session.gaze_samples[:10]:
        print(f"Time: {sample.timestamp}, Left: ({sample.left_gaze_x}, {sample.left_gaze_y})")
 
+Coordinate spaces and naming convention
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The parser distinguishes two coordinate spaces that EyeLink data live in. Field
+names follow this convention everywhere in syelink:
+
+- ``raw``  -- camera-sensor pixel space. Uncalibrated pupil and CR centres as
+  measured directly off the camera image.
+- ``href`` -- head-referenced angular space. EyeLink's internal angular
+  coordinate system, ~261.8 units per degree of visual angle.
+
+Per-sample raw fields (``RawPupilData``) carry the pupil and corneal-reflection
+centres in camera pixels:
+
+- ``left_raw.pupil_x, .pupil_y, .pupil_area, .pupil_width, .pupil_height``
+- ``left_raw.cr_x, .cr_y, .cr_area`` (plus ``cr2_*`` for the secondary CR)
+- same fields on ``right_raw``
+
+Per-sample HREF fields, when an ``edf2asc -sh`` file is merged:
+
+- ``left_href_x, left_href_y, right_href_x, right_href_y``
+
+At each cal target, ``CalibrationPoint`` stores two HREF-space pairs (both in
+HREF angular units):
+
+- ``pcr_href_x, pcr_href_y`` -- the P-CR feature, i.e. the polynomial input.
+- ``href_x, href_y``         -- the target HREF gaze, i.e. the polynomial output.
+
+The polynomial coefficients and corner correction stored on ``EyeCalibration``
+map ``(pcr_href_x, pcr_href_y)`` to ``(href_x, href_y)``.
+
 Including HREF coordinates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
