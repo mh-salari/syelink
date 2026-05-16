@@ -130,7 +130,8 @@ def main() -> None:
     if cal.left_eye:
         for point in cal.left_eye.points[:3]:  # First 3 points
             print(
-                f"  Point {point.point_number}: RAW=({point.raw_x:.1f}, {point.raw_y:.1f}) -> HREF=({point.href_x:.0f}, {point.href_y:.0f})"
+                f"  Point {point.point_number}: P-CR_HREF=({point.pcr_href_x:.1f}, {point.pcr_href_y:.1f}) "
+                f"-> HREF gaze=({point.href_x:.0f}, {point.href_y:.0f})"
             )
 
 

@@ -64,21 +64,25 @@ class DisplayCoords:
 # CALIBRATION DATA STRUCTURE
 @dataclass
 class CalibrationPoint:
-    """Single calibration point with RAW and HREF coordinates.
+    """Single calibration point: polynomial input and target HREF gaze, both in HREF space.
 
-    RAW coordinates: Pupil/camera coordinates from the eye tracker sensor (small values, ~-60 to 0 range).
-    HREF coordinates: Head-Referenced Eye Angle in angular units (~260+ units per visual degree).
-    Range approximately -2600 to +2600 for X, -2000 to +2000 for Y.
+    Naming convention used across syelink:
+        * ``raw``  → camera-sensor pixel space (uncalibrated pupil/CR centres).
+        * ``href`` → head-referenced angular space (~261.8 units per visual degree).
 
-    Format in ASC file: ``MSG <timestamp> !CAL <raw_x>, <raw_y>  <href_x>, <href_y>``
-    Example: ``MSG 270129 !CAL -55.7, -114.5  -2521, 2003``
+    Both fields below are in HREF space:
+
+    ``pcr_href_x, pcr_href_y`` — P-CR feature in HREF angular units (polynomial input).
+    ``href_x, href_y``         — target HREF gaze direction (polynomial output).
+
+    Parsed from ``MSG <ts> !CAL <pcr_href_x>, <pcr_href_y>  <href_x>, <href_y>``.
     """
 
     point_number: int  # 1-9 for calibration points, 10 is origin (0,0)
-    raw_x: float  # RAW camera x coordinate (small values, ~-60 to 0 range)
-    raw_y: float  # RAW camera y coordinate (small values, ~-150 to -90 range)
-    href_x: float  # HREF head-referenced x (angular, ~260 units/deg, ~-2600 to +2600)
-    href_y: float  # HREF head-referenced y (angular, ~260 units/deg, ~-2000 to +2000)
+    pcr_href_x: float  # P-CR feature in HREF angular space — polynomial input X
+    pcr_href_y: float  # P-CR feature in HREF angular space — polynomial input Y
+    href_x: float  # Target HREF gaze X (~261.8 units/deg, ~-2600 to +2600)
+    href_y: float  # Target HREF gaze Y (~261.8 units/deg, ~-2000 to +2000)
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> CalibrationPoint:

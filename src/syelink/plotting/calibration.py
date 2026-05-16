@@ -1,6 +1,6 @@
-"""Plot RAW calibration points for both eyes.
+"""Plot calibration points (P-CR in HREF angular space) for both eyes.
 
-Shows the mapping from RAW camera coordinates to HREF angular coordinates.
+Shows the polynomial input — the P-CR feature in HREF coordinates — at each cal target.
 """
 
 from __future__ import annotations
@@ -72,22 +72,20 @@ def plot_calibration_raw(
         # Get calibration points (exclude origin point 10)
         cal_points = [p for p in points if p.point_number != 10]
 
-        # Extract RAW coordinates
-        raw_x = [p.raw_x for p in cal_points]
-        raw_y = [p.raw_y for p in cal_points]
+        xs = [p.pcr_href_x for p in cal_points]
+        ys = [p.pcr_href_y for p in cal_points]
 
-        # Plot calibration points
         ax.scatter(
-            raw_x,
-            raw_y,
+            xs,
+            ys,
             c=colors[eye],
             marker=style.marker,
             s=style.marker_size,
             linewidths=style.marker_linewidth,
         )
 
-        ax.set_xlabel("RAW X (camera coordinate)", fontsize=style.label_fontsize)
-        ax.set_ylabel("RAW Y (camera coordinate)", fontsize=style.label_fontsize)
+        ax.set_xlabel("P-CR X (HREF angular units)", fontsize=style.label_fontsize)
+        ax.set_ylabel("P-CR Y (HREF angular units)", fontsize=style.label_fontsize)
         if style.show_grid:
             ax.grid(True, alpha=style.grid_alpha)
         ax.set_aspect("equal")
@@ -95,7 +93,7 @@ def plot_calibration_raw(
         ax.set_title(f"{eye.upper()} Eye - {result}", fontsize=style.label_fontsize, fontweight="bold")
 
     fig.suptitle(
-        f"Calibration #{cal_index + 1} - RAW Camera Coordinates\n"
+        f"Calibration #{cal_index + 1} — P-CR in HREF (polynomial input)\n"
         f"Timestamp: {cal.timestamp} ms, Type: {cal.calibration_type}, Mode: {cal.tracking_mode}",
         fontsize=style.title_fontsize,
         fontweight="bold",

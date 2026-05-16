@@ -41,10 +41,12 @@ HrefRow = tuple[float | None, float | None, float | None, float | None, float | 
 
 
 def parse_calibration_points(text: str) -> list[CalibrationPoint]:
-    """Parse calibration points from text block."""
+    """Parse ``!CAL <a>, <b>  <c>, <d>`` lines into CalibrationPoint records.
+
+    First pair is the polynomial input (P-CR in HREF angular space); second pair
+    is the target HREF gaze.
+    """
     points = []
-    # MSG	270129 !CAL -55.7, -114.5  -2521, 2003
-    # Pattern: !CAL <raw_x>, <raw_y>  <href_x>, <href_y>
     pattern = r"!CAL\s+([-\d.]+),\s+([-\d.]+)\s+([-\d.]+),\s+([-\d.]+)"
 
     matches = re.findall(pattern, text)
@@ -52,8 +54,8 @@ def parse_calibration_points(text: str) -> list[CalibrationPoint]:
         points.append(
             CalibrationPoint(
                 point_number=i + 1,
-                raw_x=float(match[0]),
-                raw_y=float(match[1]),
+                pcr_href_x=float(match[0]),
+                pcr_href_y=float(match[1]),
                 href_x=float(match[2]),
                 href_y=float(match[3]),
             )
