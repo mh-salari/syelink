@@ -6,9 +6,9 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [
-    {name = "mh-salari"}
+    {name = "Mohammadhossein Salari", email = "mohammadhossein.salari@gmail.com"}
 ]
-keywords = ["eyelink", "eye-tracking", "eye-tracker", "calibration", "validation", "asc"]
+keywords = ["eyelink", "eyelink1000plus", "eye-tracking", "eye-tracker", "calibration", "validation", "asc"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
@@ -28,7 +28,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "ruff",
+    "ruff>=0.13.0",
     "pytest",
 ]
 

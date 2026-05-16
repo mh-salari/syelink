@@ -17,7 +17,7 @@ from syelink import SessionData, parse_asc_file
 
 
 def main() -> None:
-    # Get ASC file path from command-line argument
+    """Parse the ASC at ``sys.argv[1]``, save JSON/CSV/text exports alongside it, and print a summary."""
     if len(sys.argv) < 2:
         print("Usage: python basic_usage.py <path_to_asc_file>")
         print("\nExample:")
