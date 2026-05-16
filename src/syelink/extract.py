@@ -5,7 +5,9 @@ Provides functions to extract calibration, validation, and display data from ASC
 
 from __future__ import annotations
 
+import bisect
 import math
+import operator
 import re
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -24,6 +26,7 @@ from syelink.models import (
     RawPupilData,
     RecordingData,
     SessionData,
+    TargetPresentation,
     ValidationData,
     ValidationPoint,
     ValidationSummary,
@@ -873,6 +876,159 @@ def parse_messages(asc_path: str | Path) -> list[Message]:
     return messages
 
 
+# ---------------------------------------------------------------------------
+# Target presentation windows + per-sample target-index tagging
+# ---------------------------------------------------------------------------
+
+_TARGET_RE = re.compile(r"^TARGET\s+x=(-?\d+(?:\.\d+)?)\s+y=(-?\d+(?:\.\d+)?)\s*$")
+_TARGET_ERASED_RE = re.compile(r"^TARGET_ERASED\s+x=(-?\d+(?:\.\d+)?)\s+y=(-?\d+(?:\.\d+)?)\s*$")
+
+# Layout name -> (h, v) sign tuple -> layout-relative index.
+#   h, v in {-1, 0, 1}: sign of (target - display_centre) per axis.
+# HV9: centre + 4 edges + 4 corners
+# HV5: centre + 4 corners (SR Research EyeLink 1000/Plus default)
+# HV3 / H3: horizontal centre + left + right
+# HV13: not classifiable by sign alone (4 of the points sit between centre and corners),
+#       so we leave it unmapped — presentations are still emitted with xy + timestamps.
+_LAYOUT_INDEX_MAPS: dict[str, dict[tuple[int, int], int]] = {
+    "HV9": {
+        (0, 0): 0,
+        (0, -1): 1,
+        (0, 1): 2,
+        (-1, 0): 3,
+        (1, 0): 4,
+        (-1, -1): 5,
+        (1, -1): 6,
+        (-1, 1): 7,
+        (1, 1): 8,
+    },
+    "HV5": {
+        (0, 0): 0,
+        (-1, -1): 1,
+        (1, -1): 2,
+        (-1, 1): 3,
+        (1, 1): 4,
+    },
+    "HV3": {(0, 0): 0, (-1, 0): 1, (1, 0): 2},
+    "H3": {(0, 0): 0, (-1, 0): 1, (1, 0): 2},
+}
+
+
+_CENTRE_TOL_PX = 5.0  # |target - display_centre| <= this is treated as on-axis.
+
+
+def _hv_index(xy: tuple[float, float], centre: tuple[float, float], layout: str) -> int | None:
+    """Map a target (x, y) to its layout-relative index using sign-of-offset from centre.
+
+    DisplayCoords reports the geometric centre as (left + right) / 2, which is a
+    half-pixel for the typical zero-indexed 1920x1080 frame (959.5, 539.5). Target
+    messages emitted by experiment harnesses are usually integer-pixel, so we treat
+    any axis offset within ``_CENTRE_TOL_PX`` as on-axis (h=0 or v=0).
+    """
+    dx = xy[0] - centre[0]
+    dy = xy[1] - centre[1]
+    h = 0 if abs(dx) <= _CENTRE_TOL_PX else (-1 if dx < 0 else 1)
+    v = 0 if abs(dy) <= _CENTRE_TOL_PX else (-1 if dy < 0 else 1)
+    layout_map = _LAYOUT_INDEX_MAPS.get(layout.upper())
+    if layout_map is None:
+        return None
+    return layout_map.get((h, v))
+
+
+def _extract_target_pairs(messages: list[Message]) -> list[tuple[int, int, tuple[float, float]]]:
+    """Pair TARGET / TARGET_ERASED messages into (draw_ts, erase_ts, xy) windows.
+
+    A TARGET is paired with the next TARGET_ERASED whose (x, y) matches. Unmatched
+    TARGET messages (e.g. an experiment aborted mid-target) are dropped.
+    """
+    pairs: list[tuple[int, int, tuple[float, float]]] = []
+    pending: tuple[int, float, float] | None = None
+    for m in messages:
+        tm = _TARGET_RE.match(m.text)
+        if tm:
+            pending = (m.timestamp, float(tm.group(1)), float(tm.group(2)))
+            continue
+        em = _TARGET_ERASED_RE.match(m.text)
+        if em and pending is not None:
+            ex, ey = float(em.group(1)), float(em.group(2))
+            if (ex, ey) == (pending[1], pending[2]):
+                pairs.append((pending[0], m.timestamp, (ex, ey)))
+            pending = None
+    return pairs
+
+
+def _assign_presentations_to_phases(
+    pairs: list[tuple[int, int, tuple[float, float]]],
+    calibrations: list[CalibrationData],
+    validations: list[ValidationData],
+    display_coords: DisplayCoords | None,
+) -> None:
+    """Mutate each cal/val block to attach its TargetPresentation list.
+
+    A presentation belongs to the next cal/val phase (by ``phase.timestamp``) that
+    occurs after the presentation's ``erase_ts``. Same-xy re-presentations get the
+    same ``index`` but distinct draw/erase timestamps. ``index`` is None when the
+    phase layout name is unrecognised or no DISPLAY_COORDS is available.
+    """
+    phases: list[CalibrationData | ValidationData] = sorted(
+        [*calibrations, *validations],
+        key=lambda p: p.timestamp,
+    )
+    if not phases:
+        return
+
+    layouts: list[str] = [getattr(p, "calibration_type", None) or getattr(p, "validation_type", "") for p in phases]
+    buckets: list[list[tuple[int, int, tuple[float, float]]]] = [[] for _ in phases]
+    for draw_ts, erase_ts, xy in pairs:
+        # Find the first phase whose timestamp is >= erase_ts.
+        for i, phase in enumerate(phases):
+            if phase.timestamp >= erase_ts:
+                buckets[i].append((draw_ts, erase_ts, xy))
+                break
+
+    centre = (display_coords.center_x, display_coords.center_y) if display_coords else None
+    for phase, layout, bucket in zip(phases, layouts, buckets, strict=True):
+        presentations: list[TargetPresentation] = []
+        for draw_ts, erase_ts, xy in bucket:
+            idx = _hv_index(xy, centre, layout) if (centre and layout) else None
+            presentations.append(TargetPresentation(index=idx, xy=xy, draw_ts=draw_ts, erase_ts=erase_ts))
+        phase.presentations = presentations
+
+
+def _tag_samples_with_target_index(
+    samples: list[GazeSample],
+    calibrations: list[CalibrationData],
+    validations: list[ValidationData],
+) -> None:
+    """Tag each sample with its enclosing TargetPresentation index.
+
+    Sets ``cal_target_index`` on every sample whose timestamp falls inside a
+    TargetPresentation window of any cal/val phase. Samples outside all windows,
+    or in RECORD mode, are left untouched (``None``).
+    """
+    # Flat list of (draw_ts, erase_ts, index) windows. The presentations don't
+    # overlap (TARGET → TARGET_ERASED are strictly serial), so a linear scan
+    # against a single sorted list is enough.
+    windows: list[tuple[int, int, int | None]] = []
+    for phase in (*calibrations, *validations):
+        for p in phase.presentations:
+            windows.append((p.draw_ts, p.erase_ts, p.index))
+    if not windows:
+        return
+    windows.sort(key=operator.itemgetter(0))
+    draws = [w[0] for w in windows]
+    # Bisect-right gives us the window candidate to the left of a sample's timestamp.
+    for s in samples:
+        if s.mode not in {"CALIBRATE", "VALIDATE"}:
+            continue
+        i = bisect.bisect_right(draws, s.timestamp) - 1
+        if i < 0:
+            continue
+        draw_ts, erase_ts, idx = windows[i]
+        if draw_ts <= s.timestamp <= erase_ts:
+            s.cal_target_index = idx
+
+
 def parse_asc_file(asc_path: str | Path, href_asc_path: str | Path | None = None) -> SessionData:
     """Parse an EyeLink ASC file and return structured session data.
 
@@ -949,6 +1105,12 @@ def parse_asc_file(asc_path: str | Path, href_asc_path: str | Path | None = None
 
     # Parse user-sent messages (filter out EyeLink-internal MSG lines)
     messages = parse_messages(asc_path)
+
+    # Build per-phase TargetPresentation lists from TARGET / TARGET_ERASED messages
+    # and tag each cal/val sample with its layout-relative target index.
+    target_pairs = _extract_target_pairs(messages)
+    _assign_presentations_to_phases(target_pairs, parsed_calibrations, parsed_validations, display_coords)
+    _tag_samples_with_target_index(gaze_samples, parsed_calibrations, parsed_validations)
 
     return SessionData(
         calibrations=parsed_calibrations,

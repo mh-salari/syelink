@@ -303,6 +303,36 @@ class EyeCalibration:
 
 # CALIBRATION/VALIDATION TARGETS
 @dataclass
+class TargetPresentation:
+    """One TARGET → TARGET_ERASED presentation window during a cal/val phase.
+
+    Each entry corresponds to one display of a calibration / validation target.
+    If the same screen position is shown twice (e.g. EyeLink re-shows the centre),
+    two ``TargetPresentation`` entries are emitted with the same ``index`` but
+    different ``draw_ts`` / ``erase_ts``.
+
+    ``index`` is the layout-relative index (e.g. 0..8 for HV9: 0=centre, 1=top,
+    2=bottom, 3=left, 4=right, 5=top-left, 6=top-right, 7=bottom-left,
+    8=bottom-right). ``None`` if the layout name was not recognised.
+    """
+
+    index: int | None
+    xy: tuple[float, float]
+    draw_ts: int
+    erase_ts: int
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> TargetPresentation:
+        """Create TargetPresentation from a dictionary."""
+        return cls(
+            index=data.get("index"),
+            xy=tuple(data["xy"]),
+            draw_ts=int(data["draw_ts"]),
+            erase_ts=int(data["erase_ts"]),
+        )
+
+
+@dataclass
 class CalibrationTargets:
     """Calibration/validation target positions.
 
@@ -340,6 +370,7 @@ class CalibrationData:
     targets: CalibrationTargets | None = None  # Target positions
     left_eye: EyeCalibration | None = None
     right_eye: EyeCalibration | None = None
+    presentations: list[TargetPresentation] = field(default_factory=list)
     content: str | None = None
 
     @classmethod
@@ -348,6 +379,7 @@ class CalibrationData:
         left = EyeCalibration.from_dict(data["left_eye"]) if data.get("left_eye") else None
         right = EyeCalibration.from_dict(data["right_eye"]) if data.get("right_eye") else None
         targets = CalibrationTargets.from_dict(data["targets"]) if data.get("targets") else None
+        presentations = [TargetPresentation.from_dict(p) for p in data.get("presentations", [])]
 
         return cls(
             timestamp=data["timestamp"],
@@ -356,6 +388,7 @@ class CalibrationData:
             targets=targets,
             left_eye=left,
             right_eye=right,
+            presentations=presentations,
             content=data.get("content"),
         )
 
@@ -417,6 +450,7 @@ class ValidationData:
     summary_left: ValidationSummary | None = None
     summary_right: ValidationSummary | None = None
     points: list[ValidationPoint] = field(default_factory=list)  # 18 points (9 points x 2 eyes)
+    presentations: list[TargetPresentation] = field(default_factory=list)
     content: str | None = None
 
     @classmethod
@@ -426,6 +460,7 @@ class ValidationData:
         sum_right = ValidationSummary.from_dict(data["summary_right"]) if data.get("summary_right") else None
         points = [ValidationPoint.from_dict(p) for p in data.get("points", [])]
         targets = CalibrationTargets.from_dict(data["targets"]) if data.get("targets") else None
+        presentations = [TargetPresentation.from_dict(p) for p in data.get("presentations", [])]
 
         return cls(
             timestamp=data["timestamp"],
@@ -435,6 +470,7 @@ class ValidationData:
             summary_left=sum_left,
             summary_right=sum_right,
             points=points,
+            presentations=presentations,
             content=data.get("content"),
         )
 
@@ -531,6 +567,12 @@ class GazeSample:
     right_href_x: float | None = None
     right_href_y: float | None = None
 
+    # Layout-relative index of the cal/val target this sample's timestamp falls within.
+    # None when the sample is outside any TARGET → TARGET_ERASED window, or in RECORD mode,
+    # or when the layout could not be classified. See ``TargetPresentation`` for the index
+    # convention.
+    cal_target_index: int | None = None
+
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> GazeSample:
         """Create GazeSample from a dictionary."""
@@ -562,6 +604,7 @@ class GazeSample:
             left_href_y=data.get("left_href_y"),
             right_href_x=data.get("right_href_x"),
             right_href_y=data.get("right_href_y"),
+            cal_target_index=data.get("cal_target_index"),
         )
 
 
@@ -827,6 +870,7 @@ class SessionData:
             "left_href_y",
             "right_href_x",
             "right_href_y",
+            "cal_target_index",
         ]
 
         with filepath.open("w", newline="", encoding="utf-8") as f:
@@ -901,6 +945,7 @@ class SessionData:
                     "left_href_y": sample.left_href_y if sample.left_href_y is not None else "",
                     "right_href_x": sample.right_href_x if sample.right_href_x is not None else "",
                     "right_href_y": sample.right_href_y if sample.right_href_y is not None else "",
+                    "cal_target_index": sample.cal_target_index if sample.cal_target_index is not None else "",
                 })
 
                 writer.writerow(row)
