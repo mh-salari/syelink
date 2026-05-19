@@ -802,7 +802,7 @@ def _check_pupil_area_match(
     """Raise if pupil_area disagrees between the gaze and HREF ASCs at a matched sample."""
     if gaze_pa is None or href_pa is None:
         return
-    if gaze_pa == 0.0 or href_pa == 0.0:
+    if gaze_pa == 0.0 or href_pa == 0.0:  # noqa: RUF069 — 0.0 is the ASC sentinel for an invalid pupil-area sample
         return
     if abs(gaze_pa - href_pa) > tol:
         msg = (
